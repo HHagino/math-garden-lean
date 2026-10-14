@@ -24,8 +24,12 @@ jobs:
         run: bash scripts/check_forbidden.sh
 
       # lake exe cache get（Mathlib のビルド済みファイル）→ lake build
+      # use-github-cache: false … 最初の実行（run 38518351697）で、.lake（Mathlib 込み）を
+      # GitHub の cache に固める段で runner のディスクが尽きた（No space left on device・警告のみ）。
+      # Mathlib のビルド済みファイルは lake exe cache get で約2分で取れるので、.lake は保存しない。
       - uses: leanprover/lean-action@v1
         with:
+          use-github-cache: false
           use-mathlib-cache: true
           build: true
           test: false

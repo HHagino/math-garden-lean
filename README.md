@@ -26,6 +26,13 @@ Lean 4 と Mathlib で確かめるためのリポジトリ。
 `MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean`（L1）、
 `MathGarden/DivisionAlgebra1248ProjectiveCohomology/MiddleBinomialEven.lean`（L1）。
 
+### L0（Mathlib の既存の宣言を参照したもの・2026-10-15 追加）
+
+`verified.json` の `level` が `L0` の項目。記事の主張に当たる Mathlib の宣言を `example` で参照し、型が主張と一致することを CI が確かめた
+（このリポジトリで新しく証明したものはない）。記事の文との差は、各項目の `not_covered_ja` を必ず並べて読むこと。
+記事（slug）と参照した宣言の一覧は `verified.json` を見る。ファイルは `MathGarden/<記事ごとのフォルダ>/` の下。
+
+
 ## レベル
 
 | レベル | 意味 |

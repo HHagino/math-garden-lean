@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # 証明の穴（sorry / admit）・native_decide・自前の axiom が MathGarden/ に無いこと（grep）。
+      # 先に対照（わざと鳴る入力）で検査が鳴ることを確かめる。ビルドより先に走らせて早く落とす。
+      - name: Forbidden words (sorry / admit / native_decide / axiom)
+        run: bash scripts/check_forbidden.sh
+
+      # lake exe cache get（Mathlib のビルド済みファイル）→ lake build
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build: true
+          test: false
+          lint: false
+
+      # verified.json の欄と配置、各宣言の公理（#print axioms）を確かめる。
+      - name: verified.json and axioms
+        run: python3 scripts/check_verified.py

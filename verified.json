@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "description": "知識の庭（https://hhagino.github.io/math-garden/）の記事の主張のうち、Lean 4 で確かめたものの一覧。Lean が確かめたのは lean_statement（形式化した主張）であって、article_quote_ja（記事の文）そのものではない。両者の差は not_covered_ja に書く。",
+  "lean_toolchain": "leanprover/lean4:v4.30.0",
+  "mathlib": "v4.30.0",
+  "levels": {
+    "L0": "記事の主張に当たる Mathlib の宣言を参照し、その型が主張と一致することを Lean に確かめさせた（このリポジトリで新しく証明したものはない）",
+    "L1": "記事の計算・補題を、このリポジトリで自前に証明した",
+    "L2": "記事の主張の文に近い形で主定理を形式化し、証明した"
+  },
+  "claims": [
+    {
+      "id": "pythagoras-sqrt2-p-adic-mod-8/odd-square-mod-8",
+      "article_slug": "pythagoras-sqrt2-p-adic-mod-8",
+      "article_section": "§3 奇素数の場合:ルジャンドル記号と mod 8",
+      "article_quote_ja": "標準公式によれば、(2/p) = (-1)^{(p^2-1)/8}. ここから、p を 8 で割った余りで場合分けすると:（表の列「(p^2-1)/8 の偶奇」）",
+      "claim_ja": "奇数 n（素数に限らない）について、n の平方を 8 で割った余りは 1。したがって 8 は n^2 - 1 を割り切り、記事の式の (p^2-1)/8 は整数になる。",
+      "lean_statement": "theorem MathGarden.PythagorasSqrt2PadicMod8.odd_sq_mod_eight (n : Nat) (hn : n % 2 = 1) : n ^ 2 % 8 = 1",
+      "lean_decl": "MathGarden.PythagorasSqrt2PadicMod8.odd_sq_mod_eight",
+      "file": "MathGarden/PythagorasSqrt2PadicMod8/OddSquareModEight.lean",
+      "level": "L1",
+      "not_covered_ja": "ルジャンドル記号の公式 (2/p) = (-1)^{(p^2-1)/8} そのもの、表の「偶奇」の列、Hensel の補題、√2 ∈ Q_p の判定は確かめていない。確かめたのは、式が意味を持つための前提（(p^2-1)/8 が整数）だけ。"
+    },
+    {
+      "id": "pythagoras-sqrt2-p-adic-mod-8/sqrt2-irrational",
+      "article_slug": "pythagoras-sqrt2-p-adic-mod-8",
+      "article_section": "導入:√2 は \"数ではない\" という衝撃",
+      "article_quote_ja": "辺の長さを 1 とすれば、対角線の長さは √2。ピタゴラスの定理から √2 は出てくる ── しかし、これは整数比では表せない(通約不能、incommensurable)。",
+      "claim_ja": "実数の平方根 √2 は無理数である。言い換えると、どの整数 a, b についても √2 ≠ a / b。",
+      "lean_statement": "theorem irrational_sqrt_two : Irrational (√2)",
+      "lean_decl": "irrational_sqrt_two",
+      "file": "MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean",
+      "level": "L0",
+      "not_covered_ja": "正方形の対角線の長さが √2 であること（ピタゴラスの定理の部分）、記事 §2 の「方程式 x^2 = 2 は Q で解を持たない」という言い方、史実についての記述は確かめていない。宣言は Mathlib のもの（Mathlib/NumberTheory/Real/Irrational.lean）。"
+    }
+  ]
+}

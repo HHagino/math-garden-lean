@@ -1,0 +1,12 @@
+# Lake のビルド成果物と依存パッケージ（Mathlib を含めて数GBになる）
+/.lake/
+/lake-packages/
+/build/
+
+# エディタ・OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/

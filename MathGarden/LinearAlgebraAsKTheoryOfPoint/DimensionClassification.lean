@@ -1,5 +1,6 @@
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!
 # 記事 `linear-algebra-as-k-theory-of-point` §3：有限次元ベクトル空間は次元で決まり、直和で次元は足される（L0）

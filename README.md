@@ -84,9 +84,8 @@ Lean 4 と Mathlib で確かめるためのリポジトリ。
 
 ## 公開とライセンス
 
-- いまは **private**。公開するかは本人が決める。公開するときは1コマンド：
-  `gh repo edit HHagino/math-garden-lean --visibility public --accept-visibility-change-consequences`
-- **ライセンスはまだ付けていない**（本人が決める）。
+- **public**（2026-10-14 に公開）。
+- ライセンス：**MIT**（`LICENSE`）。依存する Mathlib は Apache-2.0。
 
 ## English
 
@@ -100,4 +99,4 @@ Levels: **L0** = a Mathlib declaration is referenced and its type is checked aga
 formalized and proved (none yet). CI (GitHub Actions) greps `MathGarden/` for `sorry`/`admit`/`native_decide`/`axiom`,
 builds with `leanprover/lean-action`, and checks with `#print axioms` that every declaration in `verified.json`
 uses only `propext`, `Classical.choice` and `Quot.sound`. Lean `v4.30.0`, Mathlib `v4.30.0`.
-No license has been chosen yet.
+Licensed under the MIT License (see `LICENSE`). Mathlib, a dependency, is licensed under Apache-2.0.

@@ -59,14 +59,18 @@ theorem zetaLT_three (p N a b c : ℕ) :
           ∑ n₃ ∈ Ioo n₂ N, ((n₃ : ZMod p) ^ c)⁻¹ * 1 :=
   rfl
 
+/-- `x = 0` のとき：`ZMod` では `0⁻¹ = 0` と決めてあり、`0 ^ 9 = 0`。 -/
+theorem zero_inv_eq_zero_pow_nine : (0 : ZMod 11)⁻¹ = 0 ^ 9 :=
+  (ZMod.inv_zero 11).trans (by decide +kernel)
+
 /-- `ZMod 11` では、逆元は 9 乗に等しい（`x = 0` も含めて）。
 `x ≠ 0` なら Fermat の小定理 `x ^ 10 = 1` から `x * x ^ 9 = 1`。 -/
 theorem inv_eq_pow_nine (x : ZMod 11) : x⁻¹ = x ^ 9 := by
-  haveI : Fact (Nat.Prime 11) := ⟨Nat.prime_eleven⟩
   by_cases hx : x = 0
-  · subst hx
-    exact (ZMod.inv_zero 11).trans (by decide +kernel)
-  · apply inv_eq_of_mul_eq_one_right
+  · rw [hx]
+    exact zero_inv_eq_zero_pow_nine
+  · haveI : Fact (Nat.Prime 11) := ⟨Nat.prime_eleven⟩
+    apply inv_eq_of_mul_eq_one_right
     rw [← pow_succ']
     exact ZMod.pow_card_sub_one_eq_one hx
 

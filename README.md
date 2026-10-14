@@ -18,11 +18,13 @@ Lean 4 と Mathlib で確かめるためのリポジトリ。
 | `truncated-multiple-zeta-sum-hoffman-duality` §4 | 「p=11 で和を直接計算すると ζ_{<11}(1,4,1)≡9、ζ_{<11}(2,1,1,2)≡4 (mod 11) で、9≢±4 である」 | `zetaLT_eleven`：`zetaLT 11 11 [1, 4, 1] = 9 ∧ zetaLT 11 11 [2, 1, 1, 2] = 4 ∧`（前者 ≠ 後者）`∧`（前者 ≠ −後者）。`zetaLT p N ks` は §2 の和を `ZMod p` の中の入れ子の和として書いたもの | L1 | Hoffman 双対の計算 (1,4,1)^∨=(2,1,1,2)・star 版の双対性（Theorem 4.6）と non-star 版の式（Theorem 4.7）・p = 11 以外・「符号付き合同式はない」の一般形・N → ∞ の側 |
 | `離散直線はRnに埋め込めない_2026-06-02` §10 | 「命題. 第二可算空間の任意の離散部分空間は、高々可算である。」 | `countable_of_discrete_subspace`：`[SecondCountableTopology X] (D : Set X) [DiscreteTopology D] : D.Countable`（証明は記事 §5 の「各点が基底要素を独占する」論法） | L1 | §4 の遺伝は Mathlib のインスタンス・§9 の境界の例・距離空間での同値・別証明 (ii) |
 | `離散直線はRnに埋め込めない_2026-06-02` 冒頭・§6 | 「離散直線 ℝ_disc はどんな次元の ℝ^n にも位相的には埋め込めない」 | `realDisc_not_isEmbedding (n : ℕ) (f : RealDisc → EuclideanSpace ℝ (Fin n)) : ¬ IsEmbedding f`（`RealDisc` ＝ ℝ に離散位相 `⊥`） | L1 | ℝ の非可算性と ℝ^n の第二可算性は Mathlib のインスタンス・§1 の濃度・§2・§7 の locale・§8 の ℤ_disc ↪ ℝ・§9 |
+| `division-algebra-1248-projective-cohomology` §7 | 「補題. binom(n,k) ≡ 0 (mod 2) が 0<k<n のすべての k で成り立つことと、n=2^r（ある r≥0）であることは同値である。」 | `two_dvd_choose_iff_eq_two_pow (n : ℕ) (hn : 0 < n) : (∀ k, 0 < k → k < n → 2 ∣ n.choose k) ↔ ∃ r : ℕ, n = 2 ^ r` | L1 | 仮定 `0 < n` を置いた（n = 0 では左辺だけ成り立つ）・証明の道筋は記事と違う（⇐ は Mathlib の `Nat.Prime.dvd_choose_pow`、⇒ は Lucas の一段）・§6 までのコホモロジーの部分・記事の結論「除法的な積 ⇒ n = 2^r」・§8 以降 |
 
 ファイル：`MathGarden/PythagorasSqrt2PadicMod8/OddSquareModEight.lean`（L1）、
 `MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean`（L0）、
 `MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean`（L1）、
-`MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean`（L1）。
+`MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean`（L1）、
+`MathGarden/DivisionAlgebra1248ProjectiveCohomology/MiddleBinomialEven.lean`（L1）。
 
 ## レベル
 

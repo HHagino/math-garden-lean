@@ -68,6 +68,18 @@
       "file": "MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean",
       "level": "L1",
       "not_covered_ja": "ℝ が非可算であること（Uncountable ℝ）と ℝ^n が第二可算であることは Mathlib のインスタンスを使った。§1 の「濃度は障害にならない」（|ℝ| = |ℝ^n| と単射の存在）、§2 の「離散空間からの写像はすべて連続」、§6 末尾の「ℝ^n の中には非可算な離散部分空間が一つも存在しない」の言い方（命題の項目から直ちに出るが、ℝ^n に当てた形では書いていない）、§7 の locale（フレーム）による言い直し、§8 の ℤ_disc ↪ ℝ、§9 の境界の例は確かめていない。"
+    },
+    {
+      "id": "division-algebra-1248-projective-cohomology/middle-binomial-even-iff-two-pow",
+      "article_slug": "division-algebra-1248-projective-cohomology",
+      "article_section": "§7 中間二項係数がすべて偶数なら、n は 2 のべき",
+      "article_quote_ja": "補題. binom(n,k) ≡ 0 (mod 2) が 0<k<n のすべての k で成り立つことと、n=2^r（ある r≥0）であることは同値である。",
+      "claim_ja": "0 < n の自然数 n について、0 < k < n のすべての k で二項係数 n.choose k が 2 で割り切れることと、ある r で n = 2^r であることは同値。",
+      "lean_statement": "theorem MathGarden.DivisionAlgebra1248ProjectiveCohomology.two_dvd_choose_iff_eq_two_pow (n : ℕ) (hn : 0 < n) : (∀ k, 0 < k → k < n → 2 ∣ n.choose k) ↔ ∃ r : ℕ, n = 2 ^ r",
+      "lean_decl": "MathGarden.DivisionAlgebra1248ProjectiveCohomology.two_dvd_choose_iff_eq_two_pow",
+      "file": "MathGarden/DivisionAlgebra1248ProjectiveCohomology/MiddleBinomialEven.lean",
+      "level": "L1",
+      "not_covered_ja": "仮定 0 < n を置いた（記事の n は ℝ^n の次元で n ≥ 1。n = 0 では左辺だけが成り立つ）。証明の道筋は記事（F_2[t] の (1+t)^n の係数）と違い、⇐ は Mathlib の Nat.Prime.dvd_choose_pow に p = 2 を入れ、⇒ は Lucas の定理の一段 Choose.choose_modEq_choose_mod_mul_choose_div_nat を r 回使って C(2^r m, 2^r) ≡ m (mod 2) を出した。§6 までの部分（除法的な双線形積から射影空間の写像を作り、Z_2 係数のコホモロジーで中間二項係数が偶数になること）、記事の結論「ℝ^n に除法的な双線形積が存在する ⇒ n = 2^r」、§8 以降（複素版・n = 16・1, 2, 4, 8 への絞り込み）は確かめていない。"
     }
   ]
 }

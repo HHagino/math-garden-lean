@@ -1,5 +1,6 @@
 import Mathlib.CategoryTheory.Types.Basic
 import Mathlib.Algebra.Category.Ring.Instances
+import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.Topology.Category.TopCat.EpiMono
 import Mathlib.Topology.Category.TopCat.EffectiveEpi
 

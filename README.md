@@ -16,10 +16,13 @@ Lean 4 と Mathlib で確かめるためのリポジトリ。
 | `pythagoras-sqrt2-p-adic-mod-8` §3 | 「標準公式によれば、(2/p) = (-1)^{(p²-1)/8}」と表の列「(p²-1)/8 の偶奇」 | `odd_sq_mod_eight (n : Nat) (hn : n % 2 = 1) : n ^ 2 % 8 = 1`（奇数の平方は 8 で割ると 1 余る＝(p²-1)/8 は整数） | L1 | 公式 (2/p) = (-1)^{(p²-1)/8} そのもの・表の偶奇の列・Hensel の補題・√2 ∈ Q_p の判定 |
 | `pythagoras-sqrt2-p-adic-mod-8` 導入 | 「対角線の長さは √2。…これは整数比では表せない(通約不能)」 | Mathlib の `irrational_sqrt_two : Irrational (√2)` と、`∀ a b : ℤ, √2 ≠ a / b` | L0 | 対角線の長さが √2 であること（ピタゴラスの定理の部分）・§2 の「x² = 2 は Q で解を持たない」という言い方・史実 |
 | `truncated-multiple-zeta-sum-hoffman-duality` §4 | 「p=11 で和を直接計算すると ζ_{<11}(1,4,1)≡9、ζ_{<11}(2,1,1,2)≡4 (mod 11) で、9≢±4 である」 | `zetaLT_eleven`：`zetaLT 11 11 [1, 4, 1] = 9 ∧ zetaLT 11 11 [2, 1, 1, 2] = 4 ∧`（前者 ≠ 後者）`∧`（前者 ≠ −後者）。`zetaLT p N ks` は §2 の和を `ZMod p` の中の入れ子の和として書いたもの | L1 | Hoffman 双対の計算 (1,4,1)^∨=(2,1,1,2)・star 版の双対性（Theorem 4.6）と non-star 版の式（Theorem 4.7）・p = 11 以外・「符号付き合同式はない」の一般形・N → ∞ の側 |
+| `離散直線はRnに埋め込めない_2026-06-02` §10 | 「命題. 第二可算空間の任意の離散部分空間は、高々可算である。」 | `countable_of_discrete_subspace`：`[SecondCountableTopology X] (D : Set X) [DiscreteTopology D] : D.Countable`（証明は記事 §5 の「各点が基底要素を独占する」論法） | L1 | §4 の遺伝は Mathlib のインスタンス・§9 の境界の例・距離空間での同値・別証明 (ii) |
+| `離散直線はRnに埋め込めない_2026-06-02` 冒頭・§6 | 「離散直線 ℝ_disc はどんな次元の ℝ^n にも位相的には埋め込めない」 | `realDisc_not_isEmbedding (n : ℕ) (f : RealDisc → EuclideanSpace ℝ (Fin n)) : ¬ IsEmbedding f`（`RealDisc` ＝ ℝ に離散位相 `⊥`） | L1 | ℝ の非可算性と ℝ^n の第二可算性は Mathlib のインスタンス・§1 の濃度・§2・§7 の locale・§8 の ℤ_disc ↪ ℝ・§9 |
 
 ファイル：`MathGarden/PythagorasSqrt2PadicMod8/OddSquareModEight.lean`（L1）、
 `MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean`（L0）、
-`MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean`（L1）。
+`MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean`（L1）、
+`MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean`（L1）。
 
 ## レベル
 

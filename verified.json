@@ -44,6 +44,30 @@
       "file": "MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean",
       "level": "L1",
       "not_covered_ja": "Hoffman 双対の計算 (1,4,1)^∨=(2,1,1,2)（記事の組をそのまま使った）、star 版の Hoffman 双対性（Hoffman の Theorem 4.6）と non-star 版の式（Theorem 4.7）、p = 11 以外の素数、「non-star 版には一項の符号付き合同式はない」という一般の言い方（確かめたのは p = 11 のこの一組だけ）、N → ∞ の側（多重ゼータ値とその双対性）は確かめていない。"
+    },
+    {
+      "id": "離散直線はRnに埋め込めない_2026-06-02/discrete-subspace-of-second-countable-is-countable",
+      "article_slug": "離散直線はRnに埋め込めない_2026-06-02",
+      "article_section": "§10 一般化（証明は §4・§5）",
+      "article_quote_ja": "命題. 第二可算空間の任意の離散部分空間は、高々可算である。",
+      "claim_ja": "第二可算空間 X の部分集合 D が部分空間位相で離散なら、D は高々可算。証明は記事 §5 の論法のまま（可算基底をとると各点 x の一点集合 {x} が基底の元になり、x ↦ {x} が基底への単射）で、§4 の「第二可算は部分空間に遺伝する」は Mathlib のインスタンスを使った。",
+      "lean_statement": "theorem MathGarden.DiscreteLineNotEmbeddableInRn.countable_of_discrete_subspace {X : Type*} [TopologicalSpace X] [SecondCountableTopology X] (D : Set X) [DiscreteTopology D] : D.Countable",
+      "lean_decl": "MathGarden.DiscreteLineNotEmbeddableInRn.countable_of_discrete_subspace",
+      "file": "MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean",
+      "level": "L1",
+      "not_covered_ja": "§4 の「第二可算は部分空間に遺伝する」は自前で証明せず Mathlib の TopologicalSpace.Subtype.secondCountableTopology を使った。§9 の境界の例（{0,1}^ℝ は可分・コンパクト Hausdorff だが第二可算でなく ℝ_disc を離散部分空間に含むこと、補有限位相の例）、距離空間では第二可算・可分・Lindelöf が同値なこと、「査読・限界」の別証明 (ii)（可分距離空間の離散部分空間は高々可算）は確かめていない。"
+    },
+    {
+      "id": "離散直線はRnに埋め込めない_2026-06-02/realdisc-not-embeddable-in-rn",
+      "article_slug": "離散直線はRnに埋め込めない_2026-06-02",
+      "article_section": "主張と、その不思議さ（結論は §6）",
+      "article_quote_ja": "主張は、離散直線 ℝ_disc はどんな次元の ℝ^n にも位相的には埋め込めない、というものだ。",
+      "claim_ja": "ℝ に離散位相（位相の束の最小元 ⊥）を入れた空間 RealDisc から、標準位相の ℝ^n（EuclideanSpace ℝ (Fin n)）へのどんな写像 f も、どの n についても（n = 0 も含む）位相的埋め込み（像への同相になる単射連続写像、Topology.IsEmbedding）にならない。記事 §6 と同じく、埋め込みがあれば RealDisc は第二可算かつ離散で、§5 から高々可算になり、ℝ が非可算であることに反する。",
+      "lean_statement": "theorem MathGarden.DiscreteLineNotEmbeddableInRn.realDisc_not_isEmbedding (n : ℕ) (f : RealDisc → EuclideanSpace ℝ (Fin n)) : ¬ IsEmbedding f",
+      "lean_decl": "MathGarden.DiscreteLineNotEmbeddableInRn.realDisc_not_isEmbedding",
+      "file": "MathGarden/DiscreteLineNotEmbeddableInRn/SecondCountableDiscrete.lean",
+      "level": "L1",
+      "not_covered_ja": "ℝ が非可算であること（Uncountable ℝ）と ℝ^n が第二可算であることは Mathlib のインスタンスを使った。§1 の「濃度は障害にならない」（|ℝ| = |ℝ^n| と単射の存在）、§2 の「離散空間からの写像はすべて連続」、§6 末尾の「ℝ^n の中には非可算な離散部分空間が一つも存在しない」の言い方（命題の項目から直ちに出るが、ℝ^n に当てた形では書いていない）、§7 の locale（フレーム）による言い直し、§8 の ℤ_disc ↪ ℝ、§9 の境界の例は確かめていない。"
     }
   ]
 }

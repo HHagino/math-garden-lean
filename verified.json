@@ -224,6 +224,54 @@
       "file": "MathGarden/PythagorasSqrt2PadicMod8/TwoIsSquareModP.lean",
       "level": "L0",
       "not_covered_ja": "√2 ∈ Q_p ⇔ （mod p で 2 が平方）の部分（Hensel の補題から組む）は確かめていない。p = 2 の場合（付値の偶奇）、表の「(p²−1)/8 の偶奇」の列、公式 (2/p) = (−1)^{(p²−1)/8} そのものも確かめていない。"
+    },
+    {
+      "id": "epic-surjection-cover-distinction/epic-criteria-set-ring-top",
+      "article_slug": "epic-surjection-cover-distinction",
+      "article_section": "冒頭と §3 例 1：ℤ ↪ ℚ は epic だが全射でない",
+      "article_quote_ja": "集合の圏 Set では、射 f: X → Y が epic であることと、f が全射であることは一致する。／ 局所化の射 A → S⁻¹A はつねに CRing で epic である。",
+      "claim_ja": "集合の圏・位相空間の圏で epic ⇔ 全射、位相空間の圏で effective epic ⇔ 商写像、ℤ → ℚ は可換環の圏で epic。",
+      "lean_statement": "theorem CategoryTheory.epi_iff_surjective {X Y : Type u} (f : X ⟶ Y) : Epi f ↔ Function.Surjective f（ほか IsLocalization.epi、TopCat.epi_iff_surjective、TopCat.effectiveEpi_iff_isQuotientMap）",
+      "lean_decl": "CategoryTheory.epi_iff_surjective",
+      "file": "MathGarden/EpicSurjectionCoverDistinction/EpicCriteria.lean",
+      "level": "L0",
+      "not_covered_ja": "ℤ → ℚ が全射でないこと（1/2 が像にない）は自分では示していない。離散位相から密着位相への恒等写像が全射 epic だが商写像でないという具体例、cover（被覆）の定義、Spec や faithfully flat の話は確かめていない。"
+    },
+    {
+      "id": "ideal-contravariance-hilbert-class-field/divisibility-is-reverse-inclusion",
+      "article_slug": "ideal-contravariance-hilbert-class-field",
+      "article_section": "§3 割り切りと包含の逆転：反変性の最初の影",
+      "article_quote_ja": "a | b ⇔ (b) ⊂ (a)。… (6) ⊂ (2)。向きが逆になっている。",
+      "claim_ja": "可換な環で (x) ≤ (y) ⇔ y ∣ x。デデキント整域のイデアルでは I ∣ J ⇔ J ≤ I。",
+      "lean_statement": "theorem Ideal.dvd_iff_le {I J : Ideal A} : I ∣ J ↔ J ≤ I（ほか Ideal.span_singleton_le_span_singleton）",
+      "lean_decl": "Ideal.dvd_iff_le",
+      "file": "MathGarden/IdealContravarianceHilbertClassField/DivisibilityInclusion.lean",
+      "level": "L0",
+      "not_covered_ja": "ガロア対応の包含反転（§4 付近）と Hilbert 類体（Gal(H/K) ≅ 類群）は確かめていない（Hilbert 類体は Mathlib に見つからなかった）。整数環の (6) ⊂ (2) の具体例そのものは参照していない。"
+    },
+    {
+      "id": "nielsen-taxonomy-distances-divergences-map/hamming-triangle-and-kl-zero-iff-equal",
+      "article_slug": "nielsen-taxonomy-distances-divergences-map",
+      "article_section": "距離の条件（三角不等式）と Hamming 距離／KL divergence",
+      "article_quote_ja": "三角不等式: d(x, z) ≤ d(x, y) + d(y, z)。（距離の条件）",
+      "claim_ja": "Hamming 距離は三角不等式を満たす。有限測度の KL ダイバージェンスが 0 ⇔ 二つの測度が等しい。",
+      "lean_statement": "theorem hammingDist_triangle (x y z : ∀ i, β i) : hammingDist x z ≤ hammingDist x y + hammingDist y z（ほか InformationTheory.klDiv_eq_zero_iff）",
+      "lean_decl": "hammingDist_triangle",
+      "file": "MathGarden/NielsenTaxonomyDistancesDivergencesMap/HammingAndKL.lean",
+      "level": "L0",
+      "not_covered_ja": "KL が非対称であること・三角不等式を満たさないことは参照していない（Mathlib に見つからなかった）。Bregman・f-divergence・Fisher–Rao・Wasserstein は Mathlib に見つからず、ポスターの地図そのものは対象外。"
+    },
+    {
+      "id": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15/completed-zeta-functional-equation",
+      "article_slug": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15",
+      "article_section": "§1 導入：ζ の関数等式は総和公式の系である",
+      "article_quote_ja": "ζ(s) の関数等式 ξ(s) = ξ(1−s) は、たいてい「Riemann が示した驚くべき対称性」として登場する。",
+      "claim_ja": "完備リーマンゼータ Λ(s) = π^{−s/2}Γ(s/2)ζ(s) について、すべての複素数 s で Λ(1 − s) = Λ(s)。",
+      "lean_statement": "theorem completedRiemannZeta_one_sub (s : ℂ) : completedRiemannZeta (1 - s) = completedRiemannZeta s",
+      "lean_decl": "completedRiemannZeta_one_sub",
+      "file": "MathGarden/PoissonSummationPeterWeyl/ZetaFunctionalEquation.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の ξ(s)（Λ に s(s−1)/2 を掛けたもの）そのものではなく Mathlib の Λ。記事の核心である「関数等式は Poisson 和公式を Mellin 変換した姿」（導出）、Poisson 和公式・テータ関数の変換公式との対応（Mathlib の SchwartzMap.tsum_eq_tsum_fourier などは参照していない）、§2 の有限群の版は確かめていない。"
     }
   ]
 }

@@ -32,6 +32,18 @@
       "file": "MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean",
       "level": "L0",
       "not_covered_ja": "正方形の対角線の長さが √2 であること（ピタゴラスの定理の部分）、記事 §2 の「方程式 x^2 = 2 は Q で解を持たない」という言い方、史実についての記述は確かめていない。宣言は Mathlib のもの（Mathlib/NumberTheory/Real/Irrational.lean）。"
+    },
+    {
+      "id": "truncated-multiple-zeta-sum-hoffman-duality/nonstar-p11-values",
+      "article_slug": "truncated-multiple-zeta-sum-hoffman-duality",
+      "article_section": "§4 N=p:有限多重ゼータ値と、Hoffman 双対性",
+      "article_quote_ja": "一項どうしが符号 -1 で結ばれるのは star 版で、non-star 版の ζ_{<p} そのものには、ひとつの双対値との符号付き合同式はない。たとえば (1,4,1)^∨=(2,1,1,2) について、p=11 で和を直接計算すると ζ_{<11}(1,4,1)≡9、ζ_{<11}(2,1,1,2)≡4 (mod 11) で、9≢±4 である。",
+      "claim_ja": "記事 §2 の有限切断多重ゼータ和 ζ_{<N}(k_1,…,k_r)＝Σ_{0<n_1<…<n_r<N} 1/(n_1^{k_1}…n_r^{k_r}) を ZMod p の中の入れ子の和として定義し（zetaLT p N ks）、p = N = 11 で ζ_{<11}(1,4,1) = 9、ζ_{<11}(2,1,1,2) = 4 であること、そして ZMod 11 で ζ_{<11}(1,4,1) は ζ_{<11}(2,1,1,2) にもその符号を変えたものにも等しくない（9 ≢ ±4）ことを、和を計算して確かめた。",
+      "lean_statement": "theorem MathGarden.TruncatedMultipleZetaSumHoffmanDuality.zetaLT_eleven : zetaLT 11 11 [1, 4, 1] = 9 ∧ zetaLT 11 11 [2, 1, 1, 2] = 4 ∧ zetaLT 11 11 [1, 4, 1] ≠ zetaLT 11 11 [2, 1, 1, 2] ∧ zetaLT 11 11 [1, 4, 1] ≠ -zetaLT 11 11 [2, 1, 1, 2]",
+      "lean_decl": "MathGarden.TruncatedMultipleZetaSumHoffmanDuality.zetaLT_eleven",
+      "file": "MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean",
+      "level": "L1",
+      "not_covered_ja": "Hoffman 双対の計算 (1,4,1)^∨=(2,1,1,2)（記事の組をそのまま使った）、star 版の Hoffman 双対性（Hoffman の Theorem 4.6）と non-star 版の式（Theorem 4.7）、p = 11 以外の素数、「non-star 版には一項の符号付き合同式はない」という一般の言い方（確かめたのは p = 11 のこの一組だけ）、N → ∞ の側（多重ゼータ値とその双対性）は確かめていない。"
     }
   ]
 }

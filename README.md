@@ -15,9 +15,11 @@ Lean 4 と Mathlib で確かめるためのリポジトリ。
 |---|---|---|---|---|
 | `pythagoras-sqrt2-p-adic-mod-8` §3 | 「標準公式によれば、(2/p) = (-1)^{(p²-1)/8}」と表の列「(p²-1)/8 の偶奇」 | `odd_sq_mod_eight (n : Nat) (hn : n % 2 = 1) : n ^ 2 % 8 = 1`（奇数の平方は 8 で割ると 1 余る＝(p²-1)/8 は整数） | L1 | 公式 (2/p) = (-1)^{(p²-1)/8} そのもの・表の偶奇の列・Hensel の補題・√2 ∈ Q_p の判定 |
 | `pythagoras-sqrt2-p-adic-mod-8` 導入 | 「対角線の長さは √2。…これは整数比では表せない(通約不能)」 | Mathlib の `irrational_sqrt_two : Irrational (√2)` と、`∀ a b : ℤ, √2 ≠ a / b` | L0 | 対角線の長さが √2 であること（ピタゴラスの定理の部分）・§2 の「x² = 2 は Q で解を持たない」という言い方・史実 |
+| `truncated-multiple-zeta-sum-hoffman-duality` §4 | 「p=11 で和を直接計算すると ζ_{<11}(1,4,1)≡9、ζ_{<11}(2,1,1,2)≡4 (mod 11) で、9≢±4 である」 | `zetaLT_eleven`：`zetaLT 11 11 [1, 4, 1] = 9 ∧ zetaLT 11 11 [2, 1, 1, 2] = 4 ∧`（前者 ≠ 後者）`∧`（前者 ≠ −後者）。`zetaLT p N ks` は §2 の和を `ZMod p` の中の入れ子の和として書いたもの | L1 | Hoffman 双対の計算 (1,4,1)^∨=(2,1,1,2)・star 版の双対性（Theorem 4.6）と non-star 版の式（Theorem 4.7）・p = 11 以外・「符号付き合同式はない」の一般形・N → ∞ の側 |
 
 ファイル：`MathGarden/PythagorasSqrt2PadicMod8/OddSquareModEight.lean`（L1）、
-`MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean`（L0）。
+`MathGarden/PythagorasSqrt2PadicMod8/SqrtTwoIrrational.lean`（L0）、
+`MathGarden/TruncatedMultipleZetaSumHoffmanDuality/NonStarValuesModEleven.lean`（L1）。
 
 ## レベル
 

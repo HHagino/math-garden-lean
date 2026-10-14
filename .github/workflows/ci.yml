@@ -12,7 +12,8 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # ubuntu-latest は 2026-10-19 から Ubuntu 26 に替わる。替わり目でビルドが変わらないよう 24.04 に固定する。
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
 
     steps:

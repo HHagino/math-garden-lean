@@ -29,3 +29,4 @@ import MathGarden.PoissonSummationPeterWeyl.PoissonAndTheta
 import MathGarden.InfiniteGaloisTopologyDecides.KrullCorrespondence
 import MathGarden.FiniteGroupFourierPeterWeyl.MaschkeCharactersDFT
 import MathGarden.GaloisAsLinearAlgebraEigenspace.KummerEigenvectors
+import MathGarden.HyperbolicCircleApolloniusCayley.CircleAroundI

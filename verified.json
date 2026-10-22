@@ -512,6 +512,30 @@
       "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
       "level": "L0",
       "not_covered_ja": "Dirichlet 指標との対応、n = 5 で Q 上の固有直線に割れない話、C ⊗ Q(ζ_n) の固有空間分解は確かめていない。"
+    },
+    {
+      "id": "hyperbolic-circle-apollonius-cayley/circle-around-i-is-euclidean-circle",
+      "article_slug": "hyperbolic-circle-apollonius-cayley",
+      "article_section": "§3 i を中心とする双曲円の方程式",
+      "article_quote_ja": "双曲半径 r の円、すなわち「i からの双曲距離がちょうど r である点の集合」… 結論はこうだ。中心 (0, cosh r), 半径 sinh r",
+      "claim_ja": "上半平面の点 z について、i からの双曲距離が r であることと、z が中心 (0, cosh r)・半径 sinh r のユークリッド円の上にあることは同値。",
+      "lean_statement": "theorem MathGarden.HyperbolicCircleApolloniusCayley.hyperbolic_circle_at_i (z : ℍ) (r : ℝ) : dist z UpperHalfPlane.I = r ↔ dist (z : ℂ) ⟨0, Real.cosh r⟩ = Real.sinh r",
+      "lean_decl": "MathGarden.HyperbolicCircleApolloniusCayley.hyperbolic_circle_at_i",
+      "file": "MathGarden/HyperbolicCircleApolloniusCayley/CircleAroundI.lean",
+      "level": "L1",
+      "not_covered_ja": "Mathlib の UpperHalfPlane.dist_eq_iff_dist_coe_center_eq（任意の中心 w）に w = i を入れたもの。記事の手計算（cosh の式から平方完成する道筋）は Lean では書いていない（Mathlib の中の証明）。Mathlib の双曲距離は 2 arsinh(|z−w| / (2√(Im z Im w))) で定義されていて、記事の §2 の cosh の式とは UpperHalfPlane.cosh_dist でつながる（example で確かめた）。§4 の円束・根軸、§6・§7 のケイリー変換（Mathlib に見つからなかった）は確かめていない。"
+    },
+    {
+      "id": "hyperbolic-circle-apollonius-cayley/top-and-bottom-exp",
+      "article_slug": "hyperbolic-circle-apollonius-cayley",
+      "article_section": "§5 円の上端と下端:e^{-r} と e^{r}",
+      "article_quote_ja": "y = cosh r − sinh r = e^{−r}, y = cosh r + sinh r = e^{r}。円の下端は ie^{−r}、上端は ie^{r} である。",
+      "claim_ja": "実数 r について cosh r + sinh r = e^r、cosh r − sinh r = e^{−r}。",
+      "lean_statement": "theorem Real.cosh_add_sinh : cosh x + sinh x = exp x（ほか Real.cosh_sub_sinh : cosh x - sinh x = exp (-x)）",
+      "lean_decl": "Real.cosh_add_sinh",
+      "file": "MathGarden/HyperbolicCircleApolloniusCayley/CircleAroundI.lean",
+      "level": "L0",
+      "not_covered_ja": "等式だけ。ie^{±r} が §3 の円の上端・下端であること（円と虚軸の交点）、§5 の積分で i から ie^r までの双曲的な道のりが r になることは確かめていない。"
     }
   ]
 }

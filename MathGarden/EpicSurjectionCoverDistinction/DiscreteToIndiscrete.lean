@@ -49,12 +49,21 @@ instance : TopologicalSpace IndiscNat := ⊤
 theorem indisc_isOpen_iff (U : Set IndiscNat) : IsOpen U ↔ U = ∅ ∨ U = Set.univ :=
   TopologicalSpace.isOpen_top_iff U
 
+/-- 離散 ℕ の点 0。 -/
+def zD : DiscNat := (0 : ℕ)
+
+/-- 密着 ℕ の点 0。 -/
+def zI : IndiscNat := (0 : ℕ)
+
+/-- 密着 ℕ の点 1。 -/
+def oneI : IndiscNat := (1 : ℕ)
+
 /-- 一点集合 `{0}` は密着位相で開でない。 -/
-theorem singleton_zero_not_open : ¬ IsOpen ({(0 : ℕ)} : Set IndiscNat) := by
+theorem singleton_zero_not_open : ¬ IsOpen ({zI} : Set IndiscNat) := by
   rw [indisc_isOpen_iff]
   rintro (h | h)
   · exact Set.singleton_ne_empty _ h
-  · have h1 : ((1 : ℕ) : IndiscNat) ∈ ({(0 : ℕ)} : Set IndiscNat) := h ▸ Set.mem_univ _
+  · have h1 : oneI ∈ ({zI} : Set IndiscNat) := h ▸ Set.mem_univ oneI
     exact Nat.one_ne_zero (Set.mem_singleton_iff.mp h1)
 
 /-- 台の上で恒等の連続写像 離散 ℕ → 密着 ℕ（定義域が離散なので連続）。 -/
@@ -63,18 +72,25 @@ def toIndisc : C(DiscNat, IndiscNat) := ⟨fun n => n, continuous_of_discreteTop
 /-- 位相空間の圏 `TopCat` の射としての `toIndisc`。 -/
 abbrev idDiscToIndisc : TopCat.of DiscNat ⟶ TopCat.of IndiscNat := TopCat.ofHom toIndisc
 
-/-- 逆向きの台恒等写像（密着 ℕ → 離散 ℕ）は連続でない。 -/
-theorem inverse_not_continuous : ¬ Continuous (fun n : IndiscNat => (n : DiscNat)) := by
+/-- 逆向きの台恒等写像 密着 ℕ → 離散 ℕ。 -/
+def fromIndisc : IndiscNat → DiscNat := fun n => n
+
+/-- 逆向きの台恒等写像は連続でない（離散側で開な `{0}` の逆像 `{0}` が密着位相で開でない）。 -/
+theorem inverse_not_continuous : ¬ Continuous fromIndisc := by
   intro h
-  exact singleton_zero_not_open (h.isOpen_preimage _ (isOpen_discrete ({(0 : ℕ)} : Set DiscNat)))
+  have h1 := h.isOpen_preimage ({zD} : Set DiscNat) (isOpen_discrete _)
+  have e : fromIndisc ⁻¹' ({zD} : Set DiscNat) = ({zI} : Set IndiscNat) :=
+    Set.ext fun _ => Iff.rfl
+  rw [e] at h1
+  exact singleton_zero_not_open h1
 
 /-- `toIndisc` は開写像でない（`{0}` は離散位相で開だが、像 `{0}` は密着位相で開でない）。 -/
 theorem toIndisc_not_isOpenMap : ¬ IsOpenMap toIndisc := by
   intro h
-  apply singleton_zero_not_open
-  have h1 := h ({(0 : ℕ)} : Set DiscNat) (isOpen_discrete _)
-  rw [Set.image_singleton] at h1
-  exact h1
+  have h1 := h ({zD} : Set DiscNat) (isOpen_discrete _)
+  have e : ⇑toIndisc '' ({zD} : Set DiscNat) = ({zI} : Set IndiscNat) := Set.image_singleton
+  rw [e] at h1
+  exact singleton_zero_not_open h1
 
 /-- `toIndisc` は商写像でない（単射な商写像は開写像になるため）。 -/
 theorem toIndisc_not_isQuotientMap : ¬ IsQuotientMap toIndisc := fun h =>

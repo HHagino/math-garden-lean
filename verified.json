@@ -296,6 +296,42 @@
       "file": "MathGarden/EpicSurjectionCoverDistinction/DiscreteToIndiscrete.lean",
       "level": "L1",
       "not_covered_ja": "記事 §5 以降の読み（cover ≈ 降下の一意性＋存在）、図の包含関係、「Top は balanced でない」という一般の言い方は確かめていない（この一例だけ）。「cover を商写像と読む」は記事の読み方で、Lean が確かめたのは TopCat の effective epi でないこと（Mathlib の TopCat.effectiveEpi_iff_isQuotientMap による言い換え）。"
+    },
+    {
+      "id": "finite-infinite-primes-dirichlet-unit-theorem/unit-rank-r1-plus-r2-minus-1",
+      "article_slug": "finite-infinite-primes-dirichlet-unit-theorem",
+      "article_section": "§1 導入（板書）・§11 Dirichlet の単数定理へ",
+      "article_quote_ja": "Dirichlet の単数定理:E_K / W_K ≅ Z^{r_1 + r_2 - 1}（W_K は単元群のねじれ部分(有限位数の元全体)）",
+      "claim_ja": "数体 K について、整数環の単元群をねじれ部分で割った群（加法的に見たもの）の ℤ 上の階数は、実素点の数 r1 ＋ 複素素点の数 r2 − 1。Mathlib の rank_modTorsion・rank の定義（無限素点の数 − 1）・無限素点の数＝r1＋r2 の三つを合成した。商が自由であること（ℤ 基底 basisModTorsion がある）はファイルの example で参照した。",
+      "lean_statement": "theorem MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.units_modTorsion_finrank (K : Type*) [Field K] [NumberField K] : Module.finrank ℤ (Additive ((NumberField.RingOfIntegers K)ˣ ⧸ NumberField.Units.torsion K)) = NumberField.InfinitePlace.nrRealPlaces K + NumberField.InfinitePlace.nrComplexPlaces K - 1",
+      "lean_decl": "MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.units_modTorsion_finrank",
+      "file": "MathGarden/FiniteInfinitePrimesDirichletUnitTheorem/UnitRank.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の §10 の対数写像の正規化（複素素点の座標を 2log|σ(u)| とする）・像が格子であることの説明・§12 の具体的な数体の基本単数は確かめていない。Mathlib の torsion K は単元群のねじれ部分（記事の W_K＝1 の冪根全体と同じものと読んだが、両者が一致することは Lean では確かめていない）。r1・r2 は Mathlib では実素点・複素素点の数（埋め込みの数との対応は Mathlib の card_real_embeddings 等にあるが、ここでは参照していない）。"
+    },
+    {
+      "id": "finite-infinite-primes-dirichlet-unit-theorem/degree-r1-plus-two-r2",
+      "article_slug": "finite-infinite-primes-dirichlet-unit-theorem",
+      "article_section": "§1 導入（板書）・§8 無限素点:実埋め込みと複素埋め込み",
+      "article_quote_ja": "[K : Q] = r_1 + 2r_2",
+      "claim_ja": "数体 K について、実素点の数 ＋ 2 × 複素素点の数 ＝ [K:ℚ]（Mathlib の card_add_two_mul_card_eq_rank をそのまま参照）。",
+      "lean_statement": "theorem MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.degree_eq_r1_add_two_r2 (K : Type*) [Field K] [NumberField K] : NumberField.InfinitePlace.nrRealPlaces K + 2 * NumberField.InfinitePlace.nrComplexPlaces K = Module.finrank ℚ K",
+      "lean_decl": "MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.degree_eq_r1_add_two_r2",
+      "file": "MathGarden/FiniteInfinitePrimesDirichletUnitTheorem/UnitRank.lean",
+      "level": "L0",
+      "not_covered_ja": "§8 の例（Q(√2) で r1=2, r2=0、Q(i) で r1=0, r2=1）は確かめていない。"
+    },
+    {
+      "id": "finite-infinite-primes-dirichlet-unit-theorem/sum-e-f-equals-degree",
+      "article_slug": "finite-infinite-primes-dirichlet-unit-theorem",
+      "article_section": "§5 素数の分解",
+      "article_quote_ja": "∑_{i=1}^{g} e_i f_i = [K : Q]",
+      "claim_ja": "デデキント整域 R ⊂ S（S は有限 R 加群）と極大イデアル p ≠ 0 について、p の上の素イデアル P にわたる Σ e(P|p)·f(P|p) は分数体の拡大次数 [L:K] に等しい（Mathlib の Ideal.sum_ramification_inertia をそのまま参照。記事は R=ℤ, S=O_K の場合）。",
+      "lean_statement": "theorem MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.sum_ramification_inertia_eq_degree ... (hp0 : p ≠ ⊥) : ∑ P ∈ IsDedekindDomain.primesOverFinset p S, Ideal.ramificationIdx p P * Ideal.inertiaDeg p P = Module.finrank K L",
+      "lean_decl": "MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.sum_ramification_inertia_eq_degree",
+      "file": "MathGarden/FiniteInfinitePrimesDirichletUnitTheorem/UnitRank.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の R=ℤ, S=O_K への当てはめ（必要な instance がそろうこと）は Lean で書いていない。§6 の Q(i) での分解の具体例も確かめていない。v4.30.0 の ramificationIdx・inertiaDeg を使った（Mathlib の docs の最新版では ramificationIdx'・inertiaDeg' に替わりつつある）。"
     }
   ]
 }

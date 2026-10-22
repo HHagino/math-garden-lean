@@ -368,6 +368,30 @@
       "file": "MathGarden/DedekindEExtensionFNorm/ExtensionAndNorm.lean",
       "level": "L0",
       "not_covered_ja": "記事は §5 で N(pB)=p^{[L:K]} と §2・§3 を合わせて導くが、Lean は Mathlib の Ideal.sum_ramification_inertia を参照しただけで、その道筋は確かめていない。§5 の Q(i)（split・inert・ramified）の例、§6 の局所（DVR）での e·f=[L:K]_local は確かめていない。宣言は記事 finite-infinite-primes-dirichlet-unit-theorem の項目と同じもの。"
+    },
+    {
+      "id": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15/poisson-summation-schwartz",
+      "article_slug": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15",
+      "article_section": "§3 Poisson 和公式と、その 3 行の証明",
+      "article_quote_ja": "f:ℝ→ℂ が十分速く減衰する滑らかな関数（Schwartz 級で十分）なら Σ_{n∈ℤ} f(n) = Σ_{k∈ℤ} f^(k), f^(ξ) = ∫_ℝ f(x) e^{-2πixξ} dx.",
+      "claim_ja": "Schwartz 関数 f : ℝ → ℂ について Σ_{n∈ℤ} f(n) = Σ_{n∈ℤ} 𝓕f(n)。𝓕 の規約は 𝓕f(w) = ∫ e^{-2πi v w} f(v) dv で記事の f^ と同じ。",
+      "lean_statement": "theorem MathGarden.PoissonSummationPeterWeyl.poisson_summation_at_zero (f : 𝓢(ℝ, ℂ)) : ∑' n : ℤ, f n = ∑' n : ℤ, 𝓕 f n",
+      "lean_decl": "MathGarden.PoissonSummationPeterWeyl.poisson_summation_at_zero",
+      "file": "MathGarden/PoissonSummationPeterWeyl/PoissonAndTheta.lean",
+      "level": "L1",
+      "not_covered_ja": "Mathlib の SchwartzMap.tsum_eq_tsum_fourier（平行移動 x つき）に x = 0 を入れただけで、記事の「周期化してフーリエ係数を計算する」3 行の証明そのものは Lean で書いていない（Mathlib の中の証明がその道筋）。記事の「十分速く減衰する」は Schwartz 級に限った。§2 の有限群の部分群和公式、§4 の反例は確かめていない。"
+    },
+    {
+      "id": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15/jacobi-theta-transformation",
+      "article_slug": "Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15",
+      "article_section": "§5 Gauss 関数を入れる ── テータの変換公式",
+      "article_quote_ja": "θ(t) := Σ_{n∈ℤ} e^{-πn²t} と置けば … θ(1/t) = √t θ(t)。",
+      "claim_ja": "上半平面の τ について θ(−1/τ) = (−iτ)^{1/2} θ(τ)。ここで θ(τ) = Σ_n exp(πin²τ)。記事の実数 t > 0 は τ = it に当たる（θ(it) が記事の θ(t)、−1/τ = i/t）。",
+      "lean_statement": "theorem jacobiTheta_S_smul (τ : ℍ) : jacobiTheta ↑(ModularGroup.S • τ) = (-I * τ) ^ (1 / 2 : ℂ) * jacobiTheta τ",
+      "lean_decl": "jacobiTheta_S_smul",
+      "file": "MathGarden/PoissonSummationPeterWeyl/PoissonAndTheta.lean",
+      "level": "L0",
+      "not_covered_ja": "Mathlib のほうが一般（上半平面の複素数 τ）。記事の実数の形 θ(1/t) = √t θ(t)（τ = it を入れて (−i·it)^{1/2} = √t とする所）は Lean で書いていない。§5 の Gauss 関数のフーリエ変換・Hermite 関数の注意、§6 の Mellin 変換で ζ に渡す所は確かめていない（ξ の関数等式は別の項目 completed-zeta-functional-equation）。"
     }
   ]
 }

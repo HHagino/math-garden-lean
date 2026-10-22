@@ -25,3 +25,4 @@ import MathGarden.HassePrincipleHilbertSymbolRationalPoints.NoRationalPoint
 import MathGarden.EpicSurjectionCoverDistinction.DiscreteToIndiscrete
 import MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.UnitRank
 import MathGarden.DedekindEExtensionFNorm.ExtensionAndNorm
+import MathGarden.PoissonSummationPeterWeyl.PoissonAndTheta

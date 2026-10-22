@@ -392,6 +392,42 @@
       "file": "MathGarden/PoissonSummationPeterWeyl/PoissonAndTheta.lean",
       "level": "L0",
       "not_covered_ja": "Mathlib のほうが一般（上半平面の複素数 τ）。記事の実数の形 θ(1/t) = √t θ(t)（τ = it を入れて (−i·it)^{1/2} = √t とする所）は Lean で書いていない。§5 の Gauss 関数のフーリエ変換・Hermite 関数の注意、§6 の Mellin 変換で ζ に渡す所は確かめていない（ξ の関数等式は別の項目 completed-zeta-functional-equation）。"
+    },
+    {
+      "id": "無限次Galois対応は位相が決める_2026-06-19/fixed-field-sees-only-closure",
+      "article_slug": "無限次Galois対応は位相が決める_2026-06-19",
+      "article_section": "§3 なぜ破れたか：固定体は閉包しか見ない",
+      "article_quote_ja": "L/K を(無限次でもよい)Galois 拡大、G=Gal(L/K) とする。任意の部分群 H≤G に対し、Krull 位相での閉包を H̄ と書くと、L^H = L^H̄.",
+      "claim_ja": "Galois 拡大 K/k と Gal(K/k) の任意の部分群 H について、H の Krull 位相での閉包の固定体は H の固定体に等しい。",
+      "lean_statement": "theorem MathGarden.InfiniteGaloisTopologyDecides.fixedField_topologicalClosure [IsGalois k K] (H : Subgroup Gal(K/k)) : fixedField H.topologicalClosure = fixedField H",
+      "lean_decl": "MathGarden.InfiniteGaloisTopologyDecides.fixedField_topologicalClosure",
+      "file": "MathGarden/InfiniteGaloisTopologyDecides/KrullCorrespondence.lean",
+      "level": "L1",
+      "not_covered_ja": "証明は Mathlib の fixingSubgroup_isClosed（固定する部分群は閉）と Galois 接続を使った。記事の理由のうち「各 x を固定する条件が閉条件」という一点ごとの議論は Lean では書いていない（Mathlib の中の証明）。§2 の Gal(F̄p/Fp) ≅ Ẑ と Frobenius の例は確かめていない（Mathlib に Ẑ が見つからなかった）。"
+    },
+    {
+      "id": "無限次Galois対応は位相が決める_2026-06-19/krull-correspondence-closed-subgroups",
+      "article_slug": "無限次Galois対応は位相が決める_2026-06-19",
+      "article_section": "§5 直された辞書：閉部分群との全単射",
+      "article_quote_ja": "L/K を任意の Galois 拡大、G=Gal(L/K) に Krull 位相を入れる。{K⊆M⊆L 中間体} → {H≤G 閉部分群}, M↦Gal(L/M) は包含反転の全単射で、逆は H↦L^H。",
+      "claim_ja": "Galois 拡大 K/k について、中間体の順序と、Gal(K/k) の閉部分群の順序の双対とは順序同型（包含反転の全単射）。行きは中間体を固定する部分群、戻りは固定体。",
+      "lean_statement": "def InfiniteGalois.IntermediateFieldEquivClosedSubgroup [IsGalois k K] : IntermediateField k K ≃o (ClosedSubgroup Gal(K/k))ᵒᵈ（ほか fixedField_fixingSubgroup・fixingSubgroup_fixedField）",
+      "lean_decl": "InfiniteGalois.IntermediateFieldEquivClosedSubgroup",
+      "file": "MathGarden/InfiniteGaloisTopologyDecides/KrullCorrespondence.lean",
+      "level": "L0",
+      "not_covered_ja": "§5 の表の残り（正規 ↔ 正規部分群、有限次 ↔ 開部分群）は Lean の example にしていない（Mathlib には isOpen_iff_finite・normal_iff_isGalois がある）。"
+    },
+    {
+      "id": "無限次Galois対応は位相が決める_2026-06-19/galois-group-is-profinite",
+      "article_slug": "無限次Galois対応は位相が決める_2026-06-19",
+      "article_section": "§4 Krull 位相：何を開集合と呼ぶか",
+      "article_quote_ja": "この位相で G は射有限群になる:有限群の逆極限 G≅lim Gal(M/K)(M/K が有限次 Galois を走る)として書け、コンパクト・ハウスドルフ・完全不連結。",
+      "claim_ja": "Galois 拡大 K/k について、Gal(K/k) は有限次 Galois 中間体 L にわたる Gal(L/k) の極限と位相群として同型で、コンパクト・ハウスドルフ・完全分離。",
+      "lean_statement": "def InfiniteGalois.continuousMulEquivToLimit [IsGalois k K] : Gal(K/k) ≃ₜ* limit (asProfiniteGaloisGroupFunctor k K)（ほか CompactSpace・krullTopology_t2・TotallySeparatedSpace の instance）",
+      "lean_decl": "InfiniteGalois.continuousMulEquivToLimit",
+      "file": "MathGarden/InfiniteGaloisTopologyDecides/KrullCorrespondence.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の「完全不連結」は Lean では完全分離（TotallySeparatedSpace。完全不連結より強い）で確かめた。Ẑ = lim Z/nZ の例と、Z が Ẑ で稠密という図の主張は確かめていない。"
     }
   ]
 }

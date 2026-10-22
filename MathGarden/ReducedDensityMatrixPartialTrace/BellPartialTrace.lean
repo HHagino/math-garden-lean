@@ -94,7 +94,7 @@ theorem bellDensity_apply (p q : Fin 2 × Fin 2) :
 theorem bell_ptraceB : ptraceB bellDensity = (1 / 2 : ℝ) • (1 : Matrix (Fin 2) (Fin 2) ℝ) := by
   ext i i'
   fin_cases i <;> fin_cases i' <;>
-    simp [ptraceB, bellDensity_apply, Fin.sum_univ_two, Matrix.one_apply]
+    simp [ptraceB, bellDensity_apply, Fin.sum_univ_two]
 
 /-- 射影 O_A ＝ |0⟩⟨0|。 -/
 def proj0 : Matrix (Fin 2) (Fin 2) ℝ := !![1, 0; 0, 0]

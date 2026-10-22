@@ -764,6 +764,42 @@
       "file": "MathGarden/ReducedDensityMatrixPartialTrace/BellPartialTrace.lean",
       "level": "L1",
       "not_covered_ja": "係数は実数で書いた（上の項目と同じ）。確かめたのは O_A = |0⟩⟨0| の一例だけ（一般の O_A は §1 の項目 partial-trace-reproduces-expectations）。"
+    },
+    {
+      "id": "relativity-algebraic-rta-clifford-hurwitz/two-identity-scales-q-by-four",
+      "article_slug": "relativity-algebraic-rta-clifford-hurwitz",
+      "article_section": "2. 光速不変から Lorentz 二次形式へ",
+      "article_quote_ja": "時空 ℝ^{1,3} 上の二次形式 Q(t, x) = c^2 t^2 − |x|^2 を考える。… たとえば T=2I は光円錐を保つが Q(Tv)=4Q(v) で、光円錐を保つ線形変換の全体は Lorentz 変換の正の定数倍になり、Lorentz 群より大きい。",
+      "claim_ja": "Q(t, x) = c^2 t^2 − (x_1^2 + x_2^2 + x_3^2) を ℝ^4 上の二次形式（Mathlib の重み付き平方和 weightedSumSquares、重み (c^2, −1, −1, −1)）として定義すると、どの v についても Q(2v) = 4 Q(v)。",
+      "lean_statement": "theorem MathGarden.RelativityAlgebraicRtaCliffordHurwitz.lorentzForm_two_smul (c : ℝ) (v : Fin 4 → ℝ) : lorentzForm c ((2 : ℝ) • v) = 4 * lorentzForm c v（lorentzForm c := QuadraticMap.weightedSumSquares ℝ ![c ^ 2, -1, -1, -1]、lorentzForm_apply で c^2 v_0^2 − (v_1^2 + v_2^2 + v_3^2) と確かめた）",
+      "lean_decl": "MathGarden.RelativityAlgebraicRtaCliffordHurwitz.lorentzForm_two_smul",
+      "file": "MathGarden/RelativityAlgebraicRtaCliffordHurwitz/LorentzCliffordQuaternion.lean",
+      "level": "L1",
+      "not_covered_ja": "Q(2v) = 4Q(v) から「2I は光円錐 Q=0 を保つ」は直ちに出るが、その文は Lean で書いていない。「光円錐を保つ線形変換の全体は Lorentz 変換の正の定数倍」「定数倍を 1 に固定するには相対性原理と等方性を使う」「Q を保存する線形変換の群が O(1,3)」は確かめていない。"
+    },
+    {
+      "id": "relativity-algebraic-rta-clifford-hurwitz/clifford-square-is-lorentz-form",
+      "article_slug": "relativity-algebraic-rta-clifford-hurwitz",
+      "article_section": "3. Lorentz二次形式から Clifford代数へ",
+      "article_quote_ja": "ベクトル空間 V と二次形式 Q が与えられたとき、Clifford 代数 Cl(V, Q) は、V の元 v が v^2 = Q(v) をみたすような最も自由な結合代数として定義される。",
+      "claim_ja": "上の Lorentz 形式 Q の Clifford 代数（Mathlib の CliffordAlgebra）で、ベクトル v の像 ι(v) は ι(v)^2 = Q(v) = c^2 v_0^2 − (v_1^2 + v_2^2 + v_3^2)（スカラー倍の 1）をみたす。",
+      "lean_statement": "theorem MathGarden.RelativityAlgebraicRtaCliffordHurwitz.clifford_sq_lorentz (c : ℝ) (v : Fin 4 → ℝ) : CliffordAlgebra.ι (lorentzForm c) v * CliffordAlgebra.ι (lorentzForm c) v = algebraMap ℝ (CliffordAlgebra (lorentzForm c)) (c ^ 2 * v 0 ^ 2 - (v 1 ^ 2 + v 2 ^ 2 + v 3 ^ 2))",
+      "lean_decl": "MathGarden.RelativityAlgebraicRtaCliffordHurwitz.clifford_sq_lorentz",
+      "file": "MathGarden/RelativityAlgebraicRtaCliffordHurwitz/LorentzCliffordQuaternion.lean",
+      "level": "L1",
+      "not_covered_ja": "中身は Mathlib の CliffordAlgebra.ι_sq_scalar（ι Q m * ι Q m = algebraMap R _ (Q m)）に記事の Q を入れて書き下しただけ。「最も自由な結合代数」（普遍性 CliffordAlgebra.lift）は example にしていない。§3 の箇条（反射・Cartan–Dieudonné・Spin 群と二重被覆・スピノル・bivector）は確かめていない（Cartan–Dieudonné は下調べで見つからなかった）。"
+    },
+    {
+      "id": "relativity-algebraic-rta-clifford-hurwitz/pure-quaternion-product",
+      "article_slug": "relativity-algebraic-rta-clifford-hurwitz",
+      "article_section": "4. 電磁気との接続",
+      "article_quote_ja": "3 次元外積は 四元数 ℍ の虚部 Im ℍ ≅ ℝ^3 の積から自然に出る。u, v ∈ Im ℍ に対して、uv = −⟨u, v⟩ + u × v と分解できる。スカラー部分が内積、ベクトル部分が外積。",
+      "claim_ja": "u, v ∈ ℝ^3 を純虚四元数 u_0 i + u_1 j + u_2 k などと見ると、四元数の積 uv の実部は −(u · v)、虚部 (i, j, k の係数) は外積 u × v の 3 成分に等しい。",
+      "lean_statement": "theorem MathGarden.RelativityAlgebraicRtaCliffordHurwitz.pure_quaternion_mul (u v : Fin 3 → ℝ) : pureQuat u * pureQuat v = (QuaternionAlgebra.mk (-(u ⬝ᵥ v)) ((u ⨯₃ v) 0) ((u ⨯₃ v) 1) ((u ⨯₃ v) 2) : ℍ[ℝ])（pureQuat u := QuaternionAlgebra.mk 0 (u 0) (u 1) (u 2)）",
+      "lean_decl": "MathGarden.RelativityAlgebraicRtaCliffordHurwitz.pure_quaternion_mul",
+      "file": "MathGarden/RelativityAlgebraicRtaCliffordHurwitz/LorentzCliffordQuaternion.lean",
+      "level": "L1",
+      "not_covered_ja": "∇ を虚四元数値の演算子と見て div・curl が出る話、Maxwell 方程式（dF=0, d⋆F=⋆J と ∇F=J）、§5 の Hurwitz の定理（実ノルム多元体は ℝ・ℂ・ℍ・𝕆 だけ）と 3・7 次元の外積、§10 の Aut(ℍ) ≅ SO(3)・G2 は確かめていない（Hurwitz の定理は下調べで Mathlib に見つからなかった）。"
     }
   ]
 }

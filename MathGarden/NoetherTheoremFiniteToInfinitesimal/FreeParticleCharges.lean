@@ -39,7 +39,7 @@ theorem boost_lagrangian_variation (m qdot : ℝ) :
     HasDerivAt (fun s : ℝ => 1 / 2 * m * (qdot + s) ^ 2) (m * qdot) 0 := by
   refine ⟨fun s => by ring, ?_⟩
   have h := (((hasDerivAt_id' (0 : ℝ)).const_add qdot).pow 2).const_mul (1 / 2 * m)
-  exact h.congr_deriv (by norm_num <;> ring)
+  exact h.congr_deriv (by norm_num; ring)
 
 /-- §6(a)：並進の保存量 Q ＝ mq̇ は、自由粒子（q̈ ＝ 0）の運動で時間によらない（微分が 0）。 -/
 theorem translation_momentum_conserved (m : ℝ) (v : ℝ → ℝ) (hv : ∀ t, HasDerivAt v 0 t) (t : ℝ) :

@@ -571,7 +571,31 @@
       "lean_decl": "riemannZeta_eulerProduct_tprod",
       "file": "MathGarden/EulerFactorLocalMellin/LocalFactors.lean",
       "level": "L0",
-      "not_covered_ja": "Mathlib の completedRiemannZeta は Λ(s) = π^{-s/2}Γ(s/2)ζ(s)（極をもつ）で、記事がこの節で ξ(s) と書いているものと同じ式。ただし記事の別の箇所や前記事の ξ が s(s−1)/2 を掛けた版を指す場合とは別物。局所因子を全素点で掛けて ξ になるという積の主張（Π_v Z_v）は、Lean ではそれぞれの因子を別々に確かめただけで、掛け合わせた式は書いていない。"
+      "not_covered_ja": "Mathlib の completedRiemannZeta（Λ）は π^{-s/2}Γ(s/2)ζ(s)（s=0,1 に極をもつ）で、この記事が §1・§3 で ξ(s) と書いている式と同じ（前記事 Poisson の項目の注意にある s(s−1)/2 を掛けた ξ とは別の名前の使い方）。局所因子を全素点で掛けて ξ になるという積の主張（Π_v Z_v）は、Lean ではそれぞれの因子を別々に確かめただけで、掛け合わせた式は書いていない。"
+    },
+    {
+      "id": "simultaneous-diagonalization-commuting-matrices/commuting-preserves-eigenspaces",
+      "article_slug": "simultaneous-diagonalization-commuting-matrices",
+      "article_section": "§4 可換性が意味すること:B は A の固有空間を保つ",
+      "article_quote_ja": "A(Bv) = B(Av) = B(λ_i v) = λ_i (Bv). つまり Bv もまた V_i に入り … B は A の各固有空間を不変に保つ。",
+      "claim_ja": "可換環 R 上の加群の自己準同型 f, g が可換なら、g は f の固有空間（各固有値 μ）を保つ。",
+      "lean_statement": "theorem MathGarden.SimultaneousDiagonalizationCommutingMatrices.eigenspace_invariant_of_commute {f g : Module.End R M} (h : Commute f g) (μ : R) {x : M} (hx : x ∈ f.eigenspace μ) : g x ∈ f.eigenspace μ",
+      "lean_decl": "MathGarden.SimultaneousDiagonalizationCommutingMatrices.eigenspace_invariant_of_commute",
+      "file": "MathGarden/SimultaneousDiagonalizationCommutingMatrices/EigenspacesAndPauli.lean",
+      "level": "L1",
+      "not_covered_ja": "記事は C^n の行列。Lean は可換環上の一般の加群（記事より一般）。証明は記事と同じ一行の計算。記事 §2 の定理そのもの（対角化可能で可換なら同時対角化できる）は Mathlib に一般の形が見つからず確かめていない（Mathlib にあるのは対称作用素の版）。§7 の 3×3 の例は確かめていない。"
+    },
+    {
+      "id": "simultaneous-diagonalization-commuting-matrices/pauli-no-common-eigenvector",
+      "article_slug": "simultaneous-diagonalization-commuting-matrices",
+      "article_section": "§8 二つの条件はどちらも要る ── 否定形",
+      "article_quote_ja": "σ_x σ_z ≠ σ_z σ_x で非可換。… σ_x は σ_z の固有空間を保たない。実際、両者に共通の固有ベクトルは存在しない。同時対角化は不可能だ。",
+      "claim_ja": "Pauli 行列 σ_x = [[0,1],[1,0]], σ_z = [[1,0],[0,−1]]（複素数）について、σ_x σ_z ≠ σ_z σ_x であり、σ_x v = a v かつ σ_z v = b v をみたすベクトル v は 0 だけ（共通の固有ベクトルはない）。",
+      "lean_statement": "theorem MathGarden.SimultaneousDiagonalizationCommutingMatrices.pauli_no_common_eigenvector (v : Fin 2 → ℂ) (a b : ℂ) (hx : Matrix.mulVec σx v = a • v) (hz : Matrix.mulVec σz v = b • v) : v = 0（ほか pauli_not_commute : σx * σz ≠ σz * σx）",
+      "lean_decl": "MathGarden.SimultaneousDiagonalizationCommutingMatrices.pauli_no_common_eigenvector",
+      "file": "MathGarden/SimultaneousDiagonalizationCommutingMatrices/EigenspacesAndPauli.lean",
+      "level": "L1",
+      "not_covered_ja": "「同時対角化は不可能」は、共通の固有ベクトルがないことから従うが、その一歩（同時対角化できれば共通の固有ベクトルがある）は Lean で書いていない。σ_x・σ_z がそれぞれ対角化可能であること、対角化可能性が欠けた側の反例（ジョルダンブロック）は確かめていない。"
     }
   ]
 }

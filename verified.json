@@ -428,6 +428,42 @@
       "file": "MathGarden/InfiniteGaloisTopologyDecides/KrullCorrespondence.lean",
       "level": "L0",
       "not_covered_ja": "記事の「完全不連結」は Lean では完全分離（TotallySeparatedSpace。完全不連結より強い）で確かめた。Ẑ = lim Z/nZ の例と、Z が Ẑ で稠密という図の主張は確かめていない。"
+    },
+    {
+      "id": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15/maschke-semisimple",
+      "article_slug": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15",
+      "article_section": "§7 どこで全部が崩れるか ── 標数が位数を割るとき",
+      "article_quote_ja": "C[G] が半単純である（＝ブロック対角に割れる）ことに全面的に依存していた。それを保証しているのが Maschke の定理で、条件は「体 k の標数が |G| を割らない」である。",
+      "claim_ja": "有限群 G と、|G| が 0 にならない体 k について、k[G] 加群の部分加群は必ず補部分加群をもつ（したがって k[G] は半単純環）。",
+      "lean_statement": "theorem MonoidAlgebra.Submodule.exists_isCompl [Field k] [Group G] [Finite G] [NeZero (Nat.card G : k)] (p : Submodule k[G] V) : ∃ q : Submodule k[G] V, IsCompl p q（ほか instance IsSemisimpleRing (MonoidAlgebra k G)）",
+      "lean_decl": "MonoidAlgebra.Submodule.exists_isCompl",
+      "file": "MathGarden/FiniteGroupFourierPeterWeyl/MaschkeCharactersDFT.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の「標数が |G| を割らない」は Lean では「|G| が k で 0 でない」（同じ条件）。§7 の、割るときに崩れる例（F_p[Z/p] = F_p[x]/((x−1)^p) が局所環）は確かめていない。§4 の C[G] ≅ ∏ M_{d_i}(C) と |G| = Σ d_i² は Mathlib に見つからず確かめていない。"
+    },
+    {
+      "id": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15/character-orthonormality",
+      "article_slug": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15",
+      "article_section": "§2 まず手で分解する（指標の内積）",
+      "article_quote_ja": "内積は ⟨χ,ψ⟩ = (1/|G|) Σ_g χ(g) conj(ψ(g)) … 前者が 1 であることが V の既約性、後者が 0 であることが 1 と sgn の非同値である。",
+      "claim_ja": "代数閉体 k で |G| が可逆のとき、既約表現 ρ, σ について (1/|G|) Σ_g χ_ρ(g) χ_σ(g⁻¹) は σ ≅ ρ なら 1、そうでなければ 0。",
+      "lean_statement": "theorem Representation.char_orthonormal [IsIrreducible ρ] [IsIrreducible σ] : (Nat.card G : k)⁻¹ * ∑ g : G, ρ.character g * σ.character g⁻¹ = if Nonempty (Equiv σ ρ) then ↑1 else ↑0",
+      "lean_decl": "Representation.char_orthonormal",
+      "file": "MathGarden/FiniteGroupFourierPeterWeyl/MaschkeCharactersDFT.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の内積は複素共役 conj(ψ(g)) を使う。Mathlib は一般の代数閉体の形で ψ(g⁻¹) を使う（k = C では有限群の指標について ψ(g⁻¹) = conj(ψ(g)) だが、その言い換えは Lean で書いていない）。§2 の S_3 の指標表の数値、§5 の「既約指標は類関数の正規直交基底」（基底であること）、列の直交関係、§4 の Schur の行列成分の直交関係は確かめていない。"
+    },
+    {
+      "id": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15/dft-inversion",
+      "article_slug": "有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15",
+      "article_section": "§3 可換なら、これは高校で見たフーリエになる",
+      "article_quote_ja": "f^(j) = Σ_k f(k) ω^{jk}, f(k) = (1/n) Σ_j f^(j) ω^{-jk} ── 離散フーリエ変換と反転公式。",
+      "claim_ja": "ℤ/N 上の関数 Φ は、その DFT Φ^(j) = Σ_k e(−jk)Φ(k) から Φ(k) = N⁻¹ Σ_j e(jk) Φ^(j) で戻る（e(x) = exp(2πix/N)）。",
+      "lean_statement": "theorem MathGarden.FiniteGroupFourierPeterWeyl.dft_inversion {N : ℕ} [NeZero N] (Φ : ZMod N → ℂ) (k : ZMod N) : Φ k = (N : ℂ)⁻¹ • ∑ j : ZMod N, stdAddChar (j * k) • 𝓕 Φ j",
+      "lean_decl": "MathGarden.FiniteGroupFourierPeterWeyl.dft_inversion",
+      "file": "MathGarden/FiniteGroupFourierPeterWeyl/MaschkeCharactersDFT.lean",
+      "level": "L1",
+      "not_covered_ja": "Mathlib の DFT は e(−jk)（記事は ω^{jk}）で、反転は e(jk)（記事は ω^{−jk}）＝符号の置き方が記事と逆（j を −j に替えれば同じ式）。記事の形そのもの（符号を記事どおりにした式）は書いていない。C[Z/n] ≅ C×…×C という環の分解、可換なら同時対角化という説明は確かめていない。"
     }
   ]
 }

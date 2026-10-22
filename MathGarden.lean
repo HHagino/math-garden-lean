@@ -27,3 +27,4 @@ import MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.UnitRank
 import MathGarden.DedekindEExtensionFNorm.ExtensionAndNorm
 import MathGarden.PoissonSummationPeterWeyl.PoissonAndTheta
 import MathGarden.InfiniteGaloisTopologyDecides.KrullCorrespondence
+import MathGarden.FiniteGroupFourierPeterWeyl.MaschkeCharactersDFT

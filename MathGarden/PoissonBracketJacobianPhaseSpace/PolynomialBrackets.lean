@@ -22,8 +22,8 @@ import Mathlib.Tactic.Ring
 
 参照する宣言（Mathlib v4.30.0 のタグのソースで名前と型を確かめた）：
 
-* `MvPolynomial.pderiv`（偏微分。`Derivation`）・`pderiv_X_self`・`pderiv_X_of_ne`・`pderiv_mul`・`pderiv_pow`
-  （`Mathlib/Algebra/MvPolynomial/PDeriv.lean`）。
+* `MvPolynomial.pderiv`（偏微分。`Derivation`）・`pderiv_X_self`・`pderiv_X_of_ne`
+  （`Mathlib/Algebra/MvPolynomial/PDeriv.lean`）。積とべきの偏微分は simp（Mathlib の simp 補題）で計算した。
 * `Matrix.det_fin_two_of`（`Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean`）。
 
 物理量 F, G は q, p の実係数多項式に限った（記事は滑らかな関数）。q は変数 0、p は変数 1。定理はすべて L1。
@@ -66,7 +66,7 @@ theorem cubic_brackets :
     bracket (coordQ ^ 3) (coordP ^ 3) = 9 * coordQ ^ 2 * coordP ^ 2 ∧
     bracket (coordQ ^ 2 * coordP) (coordQ * coordP ^ 2) = 3 * coordQ ^ 2 * coordP ^ 2 := by
   constructor <;>
-    simp [bracket, coordQ, coordP, pderiv_mul, pderiv_pow] <;>
+    simp [bracket, coordQ, coordP] <;>
     ring
 
 end MathGarden.PoissonBracketJacobianPhaseSpace

@@ -872,6 +872,42 @@
       "file": "MathGarden/PoissonBracketJacobianPhaseSpace/PolynomialBrackets.lean",
       "level": "L1",
       "not_covered_ja": "確かめたのはポアソン括弧の二つの値だけ。それを量子化すると ħ^2 の項で食い違うこと、Groenewold–van Hove の定理（全多項式で整合する量子化写像は存在しない）は確かめていない（Mathlib に見つからなかった）。"
+    },
+    {
+      "id": "noether-theorem-finite-to-infinitesimal/boost-delta-l",
+      "article_slug": "noether-theorem-finite-to-infinitesimal",
+      "article_section": "6. 手で動かす ── 自由粒子で g=0 と g≠0 を見る（(b) ガリレイ・ブースト）",
+      "article_quote_ja": "q_s=q+s t、δq=t。q̇_s=q̇+s なので L_s=(1/2)m(q̇+s)^2=(1/2)m q̇^2+m q̇ s+(1/2)m s^2, δL=dL_s/ds|_0=m q̇.",
+      "claim_ja": "実数 m, q̇ について、すべての s で (1/2)m(q̇+s)^2 = (1/2)m q̇^2 + m q̇ s + (1/2)m s^2、そして s ↦ (1/2)m(q̇+s)^2 の s=0 での微分は m q̇。",
+      "lean_statement": "theorem MathGarden.NoetherTheoremFiniteToInfinitesimal.boost_lagrangian_variation (m qdot : ℝ) : (∀ s : ℝ, 1 / 2 * m * (qdot + s) ^ 2 = 1 / 2 * m * qdot ^ 2 + m * qdot * s + 1 / 2 * m * s ^ 2) ∧ HasDerivAt (fun s : ℝ => 1 / 2 * m * (qdot + s) ^ 2) (m * qdot) 0",
+      "lean_decl": "MathGarden.NoetherTheoremFiniteToInfinitesimal.boost_lagrangian_variation",
+      "file": "MathGarden/NoetherTheoremFiniteToInfinitesimal/FreeParticleCharges.lean",
+      "level": "L1",
+      "not_covered_ja": "q̇ はある時刻の値（実数）として扱った（L は q̇ だけの関数）。「m q̇ = d/dt(mq) なので g = mq と取れて δL = dg/dt」の d/dt(mq) = m q̇ の部分は、別の項目 boost-charge-conserved の証明の中で使う形でだけ扱った。§2〜§4 の一般の導出（有限変換の条件 L_s − L_0 = d/dt(G_s − G_0) を s で微分して δL = dg/dt）は確かめていない（s と t の微分の入れ替えが要る）。"
+    },
+    {
+      "id": "noether-theorem-finite-to-infinitesimal/translation-momentum-conserved",
+      "article_slug": "noether-theorem-finite-to-infinitesimal",
+      "article_section": "6. 手で動かす ── 自由粒子で g=0 と g≠0 を見る（(a) 空間並進）",
+      "article_quote_ja": "(a) 空間並進(g=0). q_s=q+s、δq=1。q̇_s=q̇ なので L_s=L_0、δL=0、よって g=0。保存量は Q=∂L/∂q̇·1−0=m q̇(運動量)。並進対称 → 運動量保存。",
+      "claim_ja": "自由粒子（速度 v(t) の微分が 0、すなわち q̈ = 0）の運動で、Q(t) = m v(t) の時間微分はどの時刻でも 0。",
+      "lean_statement": "theorem MathGarden.NoetherTheoremFiniteToInfinitesimal.translation_momentum_conserved (m : ℝ) (v : ℝ → ℝ) (hv : ∀ t, HasDerivAt v 0 t) (t : ℝ) : HasDerivAt (fun t => m * v t) 0 t",
+      "lean_decl": "MathGarden.NoetherTheoremFiniteToInfinitesimal.translation_momentum_conserved",
+      "file": "MathGarden/NoetherTheoremFiniteToInfinitesimal/FreeParticleCharges.lean",
+      "level": "L1",
+      "not_covered_ja": "自由粒子の運動方程式は q̈ = 0（v の微分が 0）として仮定に入れた。Euler–Lagrange 方程式から導くこと、L_s = L_0（並進で L が変わらない）、Q = ∂L/∂q̇·δq − g の一般の保存（§5 のネーターの定理本体）は確かめていない。"
+    },
+    {
+      "id": "noether-theorem-finite-to-infinitesimal/boost-charge-conserved",
+      "article_slug": "noether-theorem-finite-to-infinitesimal",
+      "article_section": "6. 手で動かす ── 自由粒子で g=0 と g≠0 を見る（(b) ガリレイ・ブースト）",
+      "article_quote_ja": "保存量は Q=∂L/∂q̇ δq−g=m q̇·t−mq=m(q̇ t−q). 検算:Q̇=m(q̈ t+q̇−q̇)=m q̈ t=0(自由粒子 q̈=0)。保存する。… もし g を落としていたら m q̇ t だけが残り、保存しない。",
+      "claim_ja": "q の微分が v、v の微分が 0（自由粒子）のとき、Q(t) = m(v(t) t − q(t)) の時間微分はどの時刻でも 0。一方、境界項 g = mq を落とした m v(t) t の時間微分は m v(t)（m ≠ 0・v ≠ 0 なら 0 でない）。",
+      "lean_statement": "theorem MathGarden.NoetherTheoremFiniteToInfinitesimal.boost_charge_conserved (m : ℝ) (q v : ℝ → ℝ) (hq : ∀ t, HasDerivAt q (v t) t) (hv : ∀ t, HasDerivAt v 0 t) (t : ℝ) : HasDerivAt (fun t => m * (v t * t - q t)) 0 t ∧ HasDerivAt (fun t => m * (v t * t)) (m * v t) t",
+      "lean_decl": "MathGarden.NoetherTheoremFiniteToInfinitesimal.boost_charge_conserved",
+      "file": "MathGarden/NoetherTheoremFiniteToInfinitesimal/FreeParticleCharges.lean",
+      "level": "L1",
+      "not_covered_ja": "「保存しない」は、落とした量の微分が m v(t) であることまでを書いた（m v(t) ≠ 0 の場合分けは定理の文にしていない）。−Q = m q(0)（質量×初期位置）・重心の等速直線運動という読み、§7 の時間も変える変換（エネルギー保存）と散逸系の否定形は確かめていない。"
     }
   ]
 }

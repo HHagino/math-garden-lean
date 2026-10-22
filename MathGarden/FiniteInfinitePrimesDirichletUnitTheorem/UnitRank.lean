@@ -28,22 +28,30 @@ L0 ＝ Mathlib にある宣言を参照し、その型が下の主張と一致�
   極大イデアル p の上の素イデアル P にわたって Σ e(P|p)·f(P|p) = [L:K]。
   v4.30.0 では `Ideal.ramificationIdx`・`Ideal.inertiaDeg`（docs の最新版の `ramificationIdx'`・`inertiaDeg'` ではない）。
 
-上の三つを合成して、記事の形「階数 ＝ r₁ + r₂ − 1」を一つの定理にした（`units_modTorsion_finrank`）。
+上の rank の定義と無限素点の数の式から「rank K ＝ r₁ + r₂ − 1」を定理にし（`unit_rank_eq`）、`rank_modTorsion` につないだ。
 -/
 
 namespace MathGarden.FiniteInfinitePrimesDirichletUnitTheorem
 
 open NumberField
 
-/-- 単数定理の階数：$\mathcal{O}_K^\times / W_K$ の ℤ 上の階数は $r_1 + r_2 - 1$。 -/
-theorem units_modTorsion_finrank (K : Type*) [Field K] [NumberField K] :
-    Module.finrank ℤ (Additive ((NumberField.RingOfIntegers K)ˣ ⧸ NumberField.Units.torsion K)) =
+/-- 単数定理の階数 `NumberField.Units.rank K` は $r_1 + r_2 - 1$（rank の定義＝無限素点の数 − 1 と、
+無限素点の数 ＝ 実素点の数 ＋ 複素素点の数 から）。 -/
+theorem unit_rank_eq (K : Type*) [Field K] [NumberField K] :
+    NumberField.Units.rank K =
       NumberField.InfinitePlace.nrRealPlaces K + NumberField.InfinitePlace.nrComplexPlaces K - 1 := by
-  rw [NumberField.Units.rank_modTorsion, NumberField.Units.rank, NumberField.InfinitePlace.card_eq_nrRealPlaces_add_nrComplexPlaces]
+  rw [NumberField.Units.rank, NumberField.InfinitePlace.card_eq_nrRealPlaces_add_nrComplexPlaces]
 
-/-- その商は自由：`Fin (rank K)` で添字づけた ℤ 基底がある（記事の「≅ ℤ^{r₁+r₂−1}」の自由の部分）。 -/
-noncomputable example (K : Type*) [Field K] [NumberField K] :
-    Module.Basis (Fin (NumberField.Units.rank K)) ℤ (Additive ((NumberField.RingOfIntegers K)ˣ ⧸ NumberField.Units.torsion K)) :=
+/- 記事の形：$\mathcal{O}_K^\times / W_K$（加法的に見たもの）の ℤ 上の階数は $r_1 + r_2 - 1$。
+`NumberField.Units.rank_modTorsion K : Module.finrank ℤ (Additive ((𝓞 K)ˣ ⧸ Units.torsion K)) = Units.rank K`
+に `unit_rank_eq` をつないだもの。型は Lean に推論させる（このファイルでその型を手で書くと
+`Module ℤ (Additive ((𝓞 K)ˣ ⧸ Units.torsion K))` の instance が見つからなかった：CI run 39719522968 で確かめた。
+`AddCommGroup` のほうは見つかる）。 -/
+example (K : Type*) [Field K] [NumberField K] :=
+  (NumberField.Units.rank_modTorsion K).trans (unit_rank_eq K)
+
+/- その商は自由：`Fin (rank K)` で添字づけた ℤ 基底がある（記事の「≅ ℤ^{r₁+r₂−1}」の自由の部分）。 -/
+noncomputable example (K : Type*) [Field K] [NumberField K] :=
   NumberField.Units.basisModTorsion K
 
 /-- $[K:\mathbb{Q}] = r_1 + 2r_2$。 -/

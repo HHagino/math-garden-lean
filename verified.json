@@ -302,12 +302,12 @@
       "article_slug": "finite-infinite-primes-dirichlet-unit-theorem",
       "article_section": "§1 導入（板書）・§11 Dirichlet の単数定理へ",
       "article_quote_ja": "Dirichlet の単数定理:E_K / W_K ≅ Z^{r_1 + r_2 - 1}（W_K は単元群のねじれ部分(有限位数の元全体)）",
-      "claim_ja": "数体 K について、整数環の単元群をねじれ部分で割った群（加法的に見たもの）の ℤ 上の階数は、実素点の数 r1 ＋ 複素素点の数 r2 − 1。Mathlib の rank_modTorsion・rank の定義（無限素点の数 − 1）・無限素点の数＝r1＋r2 の三つを合成した。商が自由であること（ℤ 基底 basisModTorsion がある）はファイルの example で参照した。",
-      "lean_statement": "theorem MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.units_modTorsion_finrank (K : Type*) [Field K] [NumberField K] : Module.finrank ℤ (Additive ((NumberField.RingOfIntegers K)ˣ ⧸ NumberField.Units.torsion K)) = NumberField.InfinitePlace.nrRealPlaces K + NumberField.InfinitePlace.nrComplexPlaces K - 1",
-      "lean_decl": "MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.units_modTorsion_finrank",
+      "claim_ja": "数体 K について、Mathlib の単数階数 NumberField.Units.rank K（定義は無限素点の数 − 1）は 実素点の数 r1 ＋ 複素素点の数 r2 − 1。Mathlib の rank_modTorsion（単元群をねじれ部分で割った群を加法的に見たものの ℤ 上の階数 ＝ rank K）につなぐと記事の「階数 r1+r2−1」になる（ファイルの example で、型は Lean に推論させてつないだ）。商が自由であること（ℤ 基底 basisModTorsion がある）も example で参照した。",
+      "lean_statement": "theorem MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.unit_rank_eq (K : Type*) [Field K] [NumberField K] : NumberField.Units.rank K = NumberField.InfinitePlace.nrRealPlaces K + NumberField.InfinitePlace.nrComplexPlaces K - 1",
+      "lean_decl": "MathGarden.FiniteInfinitePrimesDirichletUnitTheorem.unit_rank_eq",
       "file": "MathGarden/FiniteInfinitePrimesDirichletUnitTheorem/UnitRank.lean",
       "level": "L0",
-      "not_covered_ja": "記事の §10 の対数写像の正規化（複素素点の座標を 2log|σ(u)| とする）・像が格子であることの説明・§12 の具体的な数体の基本単数は確かめていない。Mathlib の torsion K は単元群のねじれ部分（記事の W_K＝1 の冪根全体と同じものと読んだが、両者が一致することは Lean では確かめていない）。r1・r2 は Mathlib では実素点・複素素点の数（埋め込みの数との対応は Mathlib の card_real_embeddings 等にあるが、ここでは参照していない）。"
+      "not_covered_ja": "記事の §10 の対数写像の正規化（複素素点の座標を 2log|σ(u)| とする）・像が格子であることの説明・§12 の具体的な数体の基本単数は確かめていない。Mathlib の torsion K は単元群のねじれ部分（記事の W_K＝1 の冪根全体と同じものと読んだが、両者が一致することは Lean では確かめていない）。r1・r2 は Mathlib では実素点・複素素点の数（埋め込みの数との対応は Mathlib の card_real_embeddings 等にあるが、ここでは参照していない）。 lean_decl の定理そのものは rank K についての等式で、商の階数との結びつきは example（#print axioms の対象外）で型検査しただけ。商の型を手で書くと Module ℤ の instance が見つからなかった（CI run 39719522968）ので、型を書く形にはしていない。"
     },
     {
       "id": "finite-infinite-primes-dirichlet-unit-theorem/degree-r1-plus-two-r2",

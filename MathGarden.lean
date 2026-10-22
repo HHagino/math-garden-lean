@@ -30,3 +30,4 @@ import MathGarden.InfiniteGaloisTopologyDecides.KrullCorrespondence
 import MathGarden.FiniteGroupFourierPeterWeyl.MaschkeCharactersDFT
 import MathGarden.GaloisAsLinearAlgebraEigenspace.KummerEigenvectors
 import MathGarden.HyperbolicCircleApolloniusCayley.CircleAroundI
+import MathGarden.EulerFactorLocalMellin.LocalFactors

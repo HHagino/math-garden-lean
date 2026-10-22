@@ -536,6 +536,42 @@
       "file": "MathGarden/HyperbolicCircleApolloniusCayley/CircleAroundI.lean",
       "level": "L0",
       "not_covered_ja": "等式だけ。ie^{±r} が §3 の円の上端・下端であること（円と虚軸の交点）、§5 の積分で i から ie^r までの双曲的な道のりが r になることは確かめていない。"
+    },
+    {
+      "id": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15/archimedean-local-factor-gamma",
+      "article_slug": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15",
+      "article_section": "§3 無限素点を手で計算する ── Γ 因子は同じ積分である",
+      "article_quote_ja": "Z_∞(s) = ∫_{R^×} e^{-πx²}|x|^s dx/|x| = 2∫_0^∞ e^{-πx²} x^{s-1} dx … Z_∞(s) = π^{-s/2} Γ(s/2)",
+      "claim_ja": "実数 s > 0 について 2∫_0^∞ x^{s−1} e^{−πx²} dx = π^{−s/2} Γ(s/2)。",
+      "lean_statement": "theorem MathGarden.EulerFactorLocalMellin.archimedean_local_factor {s : ℝ} (hs : 0 < s) : 2 * ∫ x in Ioi (0 : ℝ), x ^ (s - 1) * Real.exp (-π * x ^ (2 : ℝ)) = π ^ (-s / 2) * Real.Gamma (s / 2)",
+      "lean_decl": "MathGarden.EulerFactorLocalMellin.archimedean_local_factor",
+      "file": "MathGarden/EulerFactorLocalMellin/LocalFactors.lean",
+      "level": "L1",
+      "not_covered_ja": "実数の s > 0 だけ（記事は複素数の s を想定している）。記事の最初の等式（R^× 上の乗法的 Haar 測度 dx/|x| での積分＝正の半直線の 2 倍）は Lean で書いていない（2 倍の形から始めた）。§4 の自己双対性、§5 の反例は確かめていない。"
+    },
+    {
+      "id": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15/finite-local-factor-geometric",
+      "article_slug": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15",
+      "article_section": "§2 有限素点を手で計算する ── Euler 因子は等比級数である",
+      "article_quote_ja": "Z_p(s) = … = Σ_{n≥0} p^{-ns}. 等比級数だから、Re s > 0 で Z_p(s) = 1/(1−p^{-s})",
+      "claim_ja": "1 < p の自然数 p（素数を含む）と Re s > 0 の複素数 s について Σ_{n≥0} (p^{−s})^n = (1 − p^{−s})^{−1}。",
+      "lean_statement": "theorem MathGarden.EulerFactorLocalMellin.finite_local_factor {p : ℕ} (hp : 1 < p) {s : ℂ} (hs : 0 < s.re) : ∑' n : ℕ, ((p : ℂ) ^ (-s)) ^ n = (1 - (p : ℂ) ^ (-s))⁻¹",
+      "lean_decl": "MathGarden.EulerFactorLocalMellin.finite_local_factor",
+      "file": "MathGarden/EulerFactorLocalMellin/LocalFactors.lean",
+      "level": "L1",
+      "not_covered_ja": "級数の形だけ。記事の Z_p(s) を Q_p^× 上の乗法的 Haar 測度での積分として定義し、層ごとの和に分ける所は Lean で書いていない（Mathlib に ℤ_p 上の Haar 測度での局所因子が見つからなかった）。記事の p^{-ns} を Lean は (p^{-s})^n と書いた（同じ値になることは定理にしていない）。§5 の 1_{pZ_p} の反例は確かめていない。"
+    },
+    {
+      "id": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15/euler-product-zeta",
+      "article_slug": "Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15",
+      "article_section": "§3 無限素点を手で計算する（最後の式）",
+      "article_quote_ja": "そして両者を掛ければ、Re s>1 で Π_v Z_v(s) = π^{-s/2}Γ(s/2) Π_p (1−p^{-s})^{-1} = π^{-s/2}Γ(s/2) ζ(s) = ξ(s).",
+      "claim_ja": "Re s > 1 で Π_p (1 − p^{−s})^{−1} = ζ(s)（Euler 積）。あわせて Γ_ℝ(s) = π^{−s/2}Γ(s/2)、s ≠ 0 で ζ(s) = Λ(s)/Γ_ℝ(s)（example で確かめた）。",
+      "lean_statement": "theorem riemannZeta_eulerProduct_tprod (hs : 1 < s.re) : ∏' p : Primes, (1 - (p : ℂ) ^ (-s))⁻¹ = riemannZeta s（ほか Complex.Gammaℝ_def・riemannZeta_def_of_ne_zero）",
+      "lean_decl": "riemannZeta_eulerProduct_tprod",
+      "file": "MathGarden/EulerFactorLocalMellin/LocalFactors.lean",
+      "level": "L0",
+      "not_covered_ja": "Mathlib の completedRiemannZeta は Λ(s) = π^{-s/2}Γ(s/2)ζ(s)（極をもつ）で、記事がこの節で ξ(s) と書いているものと同じ式。ただし記事の別の箇所や前記事の ξ が s(s−1)/2 を掛けた版を指す場合とは別物。局所因子を全素点で掛けて ξ になるという積の主張（Π_v Z_v）は、Lean ではそれぞれの因子を別々に確かめただけで、掛け合わせた式は書いていない。"
     }
   ]
 }

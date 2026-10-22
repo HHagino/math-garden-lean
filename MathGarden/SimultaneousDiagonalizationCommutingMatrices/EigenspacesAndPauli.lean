@@ -52,7 +52,8 @@ def σz : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 theorem pauli_not_commute : σx * σz ≠ σz * σx := by
   intro h
   have h01 := congrFun (congrFun h 0) 1
-  simp [σx, σz, Matrix.mul_apply, Fin.sum_univ_two] at h01 <;> norm_num at h01
+  simp [σx, σz, Matrix.mul_apply, Fin.sum_univ_two] at h01
+  norm_num at h01
 
 /-- §8：σ_x と σ_z に共通の固有ベクトルはない（両方の固有ベクトルなら 0）。 -/
 theorem pauli_no_common_eigenvector (v : Fin 2 → ℂ) (a b : ℂ)

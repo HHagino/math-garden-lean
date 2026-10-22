@@ -596,6 +596,30 @@
       "file": "MathGarden/SimultaneousDiagonalizationCommutingMatrices/EigenspacesAndPauli.lean",
       "level": "L1",
       "not_covered_ja": "「同時対角化は不可能」は、共通の固有ベクトルがないことから従うが、その一歩（同時対角化できれば共通の固有ベクトルがある）は Lean で書いていない。σ_x・σ_z がそれぞれ対角化可能であること、対角化可能性が欠けた側の反例（ジョルダンブロック）は確かめていない。"
+    },
+    {
+      "id": "なぜZariskiでは点が数えられないか_Weil予想とGrothendieck位相_2026-06-19/projective-line-point-count",
+      "article_slug": "なぜZariskiでは点が数えられないか_Weil予想とGrothendieck位相_2026-06-19",
+      "article_section": "§2 まず手で：P^1 の点の数が要求するもの",
+      "article_quote_ja": "有限体 F_q 上の射影直線の点の数は、数えるまでもない: #P^1(F_{q^n}) = q^n + 1（F_{q^n} の元が q^n 個、それに無限遠点を一つ足す）。",
+      "claim_ja": "有限体 F について、射影直線 P^1(F) = P(F²) の点の数は #F + 1。F = F_{q^n} なら q^n + 1。",
+      "lean_statement": "theorem MathGarden.WhyZariskiCannotCountPoints.card_projective_line (F : Type*) [Field F] [Finite F] : Nat.card (ℙ F (Fin 2 → F)) = Nat.card F + 1",
+      "lean_decl": "MathGarden.WhyZariskiCannotCountPoints.card_projective_line",
+      "file": "MathGarden/WhyZariskiCannotCountPoints/ProjectiveLineAndEtale.lean",
+      "level": "L1",
+      "not_covered_ja": "Lean の P^1(F) は線形代数の射影化 ℙ(F²)（F² の 0 でないベクトルを F^× 倍で割ったもの）で、スキームとしての P^1 の F 値点ではない（両者が一致することは確かめていない）。#F_{q^n} = q^n も別に確かめていない。記事の本題（Lefschetz 跡公式・Frobenius の固有値・étale コホモロジー・ゼータの有理性）は Mathlib に見つからず確かめていない。"
+    },
+    {
+      "id": "なぜZariskiでは点が数えられないか_Weil予想とGrothendieck位相_2026-06-19/zariski-le-etale",
+      "article_slug": "なぜZariskiでは点が数えられないか_Weil予想とGrothendieck位相_2026-06-19",
+      "article_section": "§5 Grothendieck の処方：開集合を étale 被覆に取り替える",
+      "article_quote_ja": "Zariski の「開部分集合への制限」をやめ、étale 射(平坦かつ不分岐 …)の族を「被覆」とみなす。これが Grothendieck 位相で、その舞台が étale site。… まさに Zariski に欠けていた被覆を、外から足す。",
+      "claim_ja": "スキームの圏の上の Grothendieck 位相として、Zariski 位相 ≤ étale 位相（Zariski の被覆はすべて étale の被覆。étale のほうが被覆が多い）。",
+      "lean_statement": "lemma AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology : zariskiTopology ≤ etaleTopology",
+      "lean_decl": "AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology",
+      "file": "MathGarden/WhyZariskiCannotCountPoints/ProjectiveLineAndEtale.lean",
+      "level": "L0",
+      "not_covered_ja": "「étale の被覆は Zariski 局所では同相でない（真に多い）」こと、étale コホモロジー・ℓ 進コホモロジー・Artin の比較定理・Weil 予想（Deligne）は確かめていない。Mathlib の etaleTopology は大 étale site（スキーム全体の圏の上）で、記事の「X の étale site」（小 site）とは舞台が違う。"
     }
   ]
 }

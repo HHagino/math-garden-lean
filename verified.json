@@ -704,6 +704,30 @@
       "file": "MathGarden/SphericalLaplacianFromRiemannMetric/MetricAndJacobian.lean",
       "level": "L1",
       "not_covered_ja": "後半（ヤコビアン = r）は Mathlib の det_fderivPolarCoordSymm をそのまま使った。2 次元の ds^2 = dr^2 + r^2 dθ^2 と逆計量 diag(1, 1/r^2)、§6 の 2 次元ラプラシアンの式、3 次元との対比の箇条は確かめていない。r ≥ 0 は Lean で仮定した（記事は書いていない）。"
+    },
+    {
+      "id": "tsurukame-k-theory-special-class-math/tsurukame-linear-system",
+      "article_slug": "tsurukame-k-theory-special-class-math",
+      "article_section": "2. 特殊算は本当にただのテクニックなのか",
+      "article_quote_ja": "鶴亀算は、形式的には次の連立方程式を解く問題である: x + y = n, 2x + 4y = m. ここで x は鶴の頭数、y は亀の頭数。",
+      "claim_ja": "有理数 x, y, n, m について、x + y = n かつ 2x + 4y = m であることと、x = (4n − m)/2 かつ y = (m − 2n)/2 であることは同値（連立方程式の解はただ一つで、亀の数 y は「全部鶴と仮定したときの脚の不足 m − 2n を 2 で割ったもの」）。",
+      "lean_statement": "theorem MathGarden.TsurukameKTheorySpecialClassMath.tsurukame_solution (x y n m : ℚ) : (x + y = n ∧ 2 * x + 4 * y = m) ↔ (x = (4 * n - m) / 2 ∧ y = (m - 2 * n) / 2)",
+      "lean_decl": "MathGarden.TsurukameKTheorySpecialClassMath.tsurukame_solution",
+      "file": "MathGarden/TsurukameKTheorySpecialClassMath/TsurukameAndK0Point.lean",
+      "level": "L1",
+      "not_covered_ja": "頭数は本来自然数だが、Lean は有理数で解いた（自然数の解があるための条件＝m が偶数で 2n ≤ m ≤ 4n は確かめていない）。同じファイルの crane_to_turtle で「鶴を亀に置き換えると脚が 2 本増える」（2(x−1)+4(y+1) = 2x+4y+2）を確かめた。「全部鶴と仮定する」解き方そのものや、保存量・同値類などの見立ては扱っていない。"
+    },
+    {
+      "id": "tsurukame-k-theory-special-class-math/k0-point-is-z",
+      "article_slug": "tsurukame-k-theory-special-class-math",
+      "article_section": "4. 1点上のK理論としての冗談",
+      "article_quote_ja": "X を一点空間 pt に取ると、一点上のベクトル束はただの有限次元複素ベクトル空間にほかならない。同型類は次元 dim V ∈ ℕ で決まり、Grothendieck 群化すれば K^0(pt) ≅ ℤ.",
+      "claim_ja": "可換モノイド (ℕ, +) の Grothendieck 群（Mathlib の Algebra.GrothendieckAddGroup ℕ）は加法群として ℤ と同型で、同型は [n] ↦ n で与えられる。証明は普遍性（lift）で ℕ → ℤ を持ち上げ、k ↦ k•[1] を逆として作った。",
+      "lean_statement": "theorem MathGarden.TsurukameKTheorySpecialClassMath.k0_point_equiv_int : ∃ e : Algebra.GrothendieckAddGroup ℕ ≃+ ℤ, ∀ n : ℕ, e (Algebra.GrothendieckAddGroup.of n) = n",
+      "lean_decl": "MathGarden.TsurukameKTheorySpecialClassMath.k0_point_equiv_int",
+      "file": "MathGarden/TsurukameKTheorySpecialClassMath/TsurukameAndK0Point.lean",
+      "level": "L1",
+      "not_covered_ja": "K^0(pt) をベクトル束（ベクトル空間）の同型類のモノイドとして作ることはしていない。Lean は次元のモノイド (ℕ, +) の Grothendieck 群から始めた。「同型類は次元で決まる」の部分は別記事の項目 linear-algebra-as-k-theory-of-point/finite-dimensional-classification-by-dimension（Mathlib の nonempty_linearEquiv_iff_finrank_eq）に当たり、二つをつないだ形（Vect(pt) の同型類の Grothendieck 群 ≅ ℤ）は書いていない。§3 の「鶴と亀の Grothendieck 群」や「K(ℕ^2) ≅ ℤ^2」、§6 以降の Hodge Laplacian・変形量子化は扱っていない。"
     }
   ]
 }

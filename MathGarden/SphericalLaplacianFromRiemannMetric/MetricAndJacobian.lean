@@ -99,7 +99,7 @@ def jacobian (r θ φ : ℝ) : Matrix (Fin 3) (Fin 3) ℝ :=
 theorem det_jacobian (r θ φ : ℝ) : (jacobian r θ φ).det = r ^ 2 * Real.sin θ := by
   rw [Matrix.det_fin_three]
   simp only [jacobian, Matrix.of_apply, Matrix.cons_val_zero, Matrix.cons_val_one,
-    Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons, Matrix.cons_val]
+    Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons]
   have h1 := Real.sin_sq_add_cos_sq θ
   have h2 := Real.sin_sq_add_cos_sq φ
   linear_combination

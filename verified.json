@@ -944,6 +944,42 @@
       "file": "MathGarden/CylindricalShellToAharonovBohm/QuantizationConditions.lean",
       "level": "L1",
       "not_covered_ja": "記事の周期 h/|q| に対し Lean は h/q だけずらすことを示した（q < 0 なら −h/q だけずらすのと同じ集合なので、周期 |h/q| になる。その言い換えは書いていない）。h/q が最小の周期であることは確かめていない。エネルギーの式そのもの（最小結合・A_φ = Φ_B/(2πr) から m → m − qΦ_B/h が出る所）と、円筒シェルの場合のベッセル次数のずれは確かめていない。"
+    },
+    {
+      "id": "manifold-to-orbifold-symmetry-as-structure/rotation-local-groups",
+      "article_slug": "manifold-to-orbifold-symmetry-as-structure",
+      "article_section": "5. 固定点・安定化群・局所群の意味",
+      "article_quote_ja": "具体例:円盤 D^2 = {z ∈ ℂ | |z| ≤ 1} に、回転群 Γ = ℤ/n を z ↦ e^{2πi/n} z で作用させる。中心 0 は唯一の 固定点:Γ·0 = {0}。それ以外の点 z ≠ 0 では、Γ は自由に作用する(γz = z なら γ = e)。… 中心は局所群 ℤ/n を背負った特別な点、それ以外の点は局所群自明の普通の点。",
+      "claim_ja": "n ≠ 0、ζ = e^{2πi/n} とし、ℤ/n の元 [k] を回転 z ↦ ζ^k z で表す。どの k でも ζ^k·0 = 0（中心はすべての回転で動かない）。0 でない z では ζ^k z = z ⇔ n ∣ k（[k] = e のときだけ動かない）。",
+      "lean_statement": "theorem MathGarden.ManifoldToOrbifoldSymmetryAsStructure.local_groups (n : ℕ) (hn : n ≠ 0) : (∀ k : ℕ, rot n ^ k * 0 = 0) ∧ (∀ z : ℂ, z ≠ 0 → ∀ k : ℕ, (rot n ^ k * z = z ↔ n ∣ k))（rot n := Complex.exp (2 * π * I / n)）",
+      "lean_decl": "MathGarden.ManifoldToOrbifoldSymmetryAsStructure.local_groups",
+      "file": "MathGarden/ManifoldToOrbifoldSymmetryAsStructure/RotationLocalGroups.lean",
+      "level": "L1",
+      "not_covered_ja": "群 ℤ/n の作用（MulAction）としては書いていない（[k] を ζ^k 倍で表し、[k] = e を n ∣ k と書いた）。作用は |z| を変えないので円盤 D^2 でも同じだが、D^2 への制限は書いていない。「中心は唯一の固定点」は、0 でない z が [1]（n ≥ 2 のとき e でない）で動くことから出るが、その文は書いていない。商 D^2/Γ が円錐角 2π/n の円錐になること、軌道体の構造（局所群を記録する）は確かめていない。"
+    },
+    {
+      "id": "manifold-to-orbifold-symmetry-as-structure/power-map-identifies-orbits",
+      "article_slug": "manifold-to-orbifold-symmetry-as-structure",
+      "article_section": "4. 軌道体は単なる特異空間ではない",
+      "article_quote_ja": "商空間 Ũ/G_x を 集合や位相空間として だけ見ると、たとえば ℂ/(ℤ/n)(回転群で割った平面)は、中心が尖った 円錐 の絵になる(尖りは平らな計量を降ろしたときの円錐角 2π/n のことで、位相空間としては z ↦ z^n により平面と同相)。",
+      "claim_ja": "n ≠ 0 のとき、複素数 z, w について w^n = z^n ⇔ ある k で w = ζ^k z（ζ = e^{2πi/n}）。つまり z ↦ z^n はちょうど回転の軌道を一点につぶす（軌道の集合 ℂ/(ℤ/n) から ℂ への写像として単射）。",
+      "lean_statement": "theorem MathGarden.ManifoldToOrbifoldSymmetryAsStructure.pow_eq_pow_iff_same_orbit (n : ℕ) (hn : n ≠ 0) (z w : ℂ) : w ^ n = z ^ n ↔ ∃ k : ℕ, w = rot n ^ k * z",
+      "lean_decl": "MathGarden.ManifoldToOrbifoldSymmetryAsStructure.pow_eq_pow_iff_same_orbit",
+      "file": "MathGarden/ManifoldToOrbifoldSymmetryAsStructure/RotationLocalGroups.lean",
+      "level": "L1",
+      "not_covered_ja": "確かめたのは「z^n が同じ ⇔ 同じ軌道」（商から ℂ への写像が well-defined かつ単射）まで。全射（どの複素数も n 乗根を持つ）と、商位相での同相であることは書いていない。円錐角 2π/n（計量）と、同じ位相空間が別の軌道体構造を持ちうる例（ℤ/2 と ℤ/3）は確かめていない。"
+    },
+    {
+      "id": "l-adic-vs-p-adic-galois-representation/cyclotomic-character",
+      "article_slug": "l-adic-vs-p-adic-galois-representation",
+      "article_section": "2.4 円分指標",
+      "article_quote_ja": "特に重要な 1 次元表現が 円分指標 (cyclotomic character) χ_l: G_K → ℤ_l^× で、これは G_K の 1 のべき乗根への作用 σ(ζ_{l^n}) = ζ_{l^n}^{χ_l(σ) mod l^n} によって定義される。",
+      "claim_ja": "整域 L が 1 の原始 l^i 乗根をすべての i について持つとき、Mathlib の円分指標 χ_l : (L の環自己同型) →* ℤ_l^× は、ζ^{l^n} = 1 をみたすすべての ζ と自己同型 σ について σ(ζ) = ζ^{(χ_l(σ) mod l^n)} をみたす。",
+      "lean_statement": "theorem MathGarden.LAdicVsPAdicGaloisRepresentation.cyclotomic_character_spec {L : Type*} [CommRing L] [IsDomain L] (l : ℕ) [Fact l.Prime] [∀ i, HasEnoughRootsOfUnity L (l ^ i)] (σ : L ≃+* L) {n : ℕ} (ζ : L) (hζ : ζ ^ l ^ n = 1) : σ ζ = ζ ^ ((cyclotomicCharacter L l σ).val.toZModPow n).val",
+      "lean_decl": "MathGarden.LAdicVsPAdicGaloisRepresentation.cyclotomic_character_spec",
+      "file": "MathGarden/LAdicVsPAdicGaloisRepresentation/CyclotomicCharacter.lean",
+      "level": "L0",
+      "not_covered_ja": "宣言は Mathlib の cyclotomicCharacter.spec をそのまま当てたもの。Mathlib の円分指標は L のすべての環自己同型の上で定義され、記事の G_K = Gal(K^sep/K) はその部分群として入る（同じファイルの example で、Gal(L/K) に制限すると Krull 位相で連続であること＝cyclotomicCharacter.continuous を参照した）。L が l^i 乗根を持たないとき Mathlib の定義は自明な指標になる。Tate 加群 ℤ_l(1) = lim μ_{l^n}・Tate twist V(n)、§2.5 以降（ガロワコホモロジー・l 進表現と p 進 Hodge 理論）は確かめていない。"
     }
   ]
 }

@@ -490,24 +490,24 @@
       "not_covered_ja": "1 の n 乗根の群が位数 n の巡回群であること、[L:K] = n、L/K が Galois であることは、このファイルの example にしていない（Mathlib には isCyclic_of_isSplittingField_X_pow_sub_C などがある）。"
     },
     {
-      "id": "galois-as-linear-algebra-eigenspace/characters-linearly-independent",
+      "id": "galois-as-linear-algebra-eigenspace/eigenvalue-is-character",
       "article_slug": "galois-as-linear-algebra-eigenspace",
       "article_section": "§4 固有値の正体は指標である",
-      "article_quote_ja": "（§4 の主張の土台）有限群の異なる指標は一次独立。",
-      "claim_ja": "モノイド G から整域 L への準同型（指標）の族は、L 上の G → L の関数として一次独立（Dedekind）。",
-      "lean_statement": "theorem linearIndependent_monoidHom (G : Type*) [MulOneClass G] (L : Type*) [CommRing L] [IsDomain L] : LinearIndependent L (M := G → L) (fun f => f : (G →* L) → G → L)",
-      "lean_decl": "linearIndependent_monoidHom",
+      "article_quote_ja": "「σ^k を作用させたときの固有値」は … χ_j : G → K^×, χ_j(σ^k) = ζ_n^{jk} で与えられ、σ'(x) = χ_j(σ')x と一行で書ける。… χ_j は群準同型 G → K^×、すなわち一次元表現、別名指標 (character) だ。",
+      "claim_ja": "K が 1 の原始 n 乗根を含み X^n − a が既約のとき、根 α について、Galois 群から K^× への群準同型 χ があって、すべての σ で σ(α) = χ(σ)·α。",
+      "lean_statement": "theorem MathGarden.GaloisAsLinearAlgebraEigenspace.eigenvalue_is_character (hζ : (primitiveRoots n K).Nonempty) {a : K} (H : Irreducible (X ^ n - C a)) : ∃ χ : (AdjoinRoot (X ^ n - C a) ≃ₐ[K] AdjoinRoot (X ^ n - C a)) →* Kˣ, ∀ σ, σ (AdjoinRoot.root (X ^ n - C a)) = ((χ σ : Kˣ) : K) • AdjoinRoot.root (X ^ n - C a)",
+      "lean_decl": "MathGarden.GaloisAsLinearAlgebraEigenspace.eigenvalue_is_character",
       "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
-      "level": "L0",
-      "not_covered_ja": "article_quote_ja は記事の文の写しではなく、§4 が拠っている標準事実をこちらで要約したもの（記事の §4 の本文に同じ一文はない）。指標ごとの固有空間 L_χ への直和分解（§5）は Mathlib に見つからず確かめていない。"
+      "level": "L1",
+      "not_covered_ja": "α（j = 1）の場合だけ。α^j の指標が χ^j であること（χ_j(σ^k) = ζ^{jk}）は定理の文にしていない（root_pow_eigenvector は固有値が c^j であることまで）。§5 の L = ⊕ L_χ の直和分解、異なる指標の固有空間の独立性は確かめていない。"
     },
     {
       "id": "galois-as-linear-algebra-eigenspace/cyclotomic-galois-units-zmod",
       "article_slug": "galois-as-linear-algebra-eigenspace",
       "article_section": "§9 展望（円分拡大）",
       "article_quote_ja": "円分拡大。Q(ζ_n) の Galois 群は (Z/nZ)^× と同型で、このアーベル群の指標がまさに Dirichlet 指標だ。",
-      "claim_ja": "ℚ(ζ_n)（Mathlib の CyclotomicField n ℚ）の ℚ 上の Galois 群は (ℤ/n)^× と群として同型（n ≥ 1）。",
-      "lean_statement": "def IsCyclotomicExtension.autEquivPow (h : Irreducible (cyclotomic n K)) : Gal(L/K) ≃* (ZMod n)ˣ に L = CyclotomicField n ℚ と cyclotomic.irreducible_rat を入れたもの",
+      "claim_ja": "ℚ の n 次円分拡大 L（ℚ(ζ_n)。IsCyclotomicExtension {n} ℚ L）の ℚ 上の Galois 群は (ℤ/n)^× と群として同型（n ≥ 1）。",
+      "lean_statement": "def IsCyclotomicExtension.autEquivPow (h : Irreducible (cyclotomic n K)) : Gal(L/K) ≃* (ZMod n)ˣ に K = ℚ と cyclotomic.irreducible_rat を入れたもの（L は IsCyclotomicExtension {n} ℚ L をみたす任意の体）",
       "lean_decl": "IsCyclotomicExtension.autEquivPow",
       "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
       "level": "L0",

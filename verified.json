@@ -908,6 +908,42 @@
       "file": "MathGarden/NoetherTheoremFiniteToInfinitesimal/FreeParticleCharges.lean",
       "level": "L1",
       "not_covered_ja": "「保存しない」は、落とした量の微分が m v(t) であることまでを書いた（m v(t) ≠ 0 の場合分けは定理の文にしていない）。−Q = m q(0)（質量×初期位置）・重心の等速直線運動という読み、§7 の時間も変える変換（エネルギー保存）と散逸系の否定形は確かめていない。"
+    },
+    {
+      "id": "cylindrical-shell-to-aharonov-bohm/single-valued-integer-m",
+      "article_slug": "cylindrical-shell-to-aharonov-bohm",
+      "article_section": "第2節 ── 角度方向の周期性と m ∈ ℤ",
+      "article_quote_ja": "φ と φ + 2π は同じ物理的な点を表す。よって波動関数の一価性から Φ(φ + 2π) = Φ(φ) を要求する。これは e^{2πiα} = 1、つまり α = m, m ∈ ℤ を意味する。",
+      "claim_ja": "実数 α について、すべての実数 φ で e^{iα(φ+2π)} = e^{iαφ} が成り立つことと、α が整数であることは同値（証明は e^{iα(φ+2π)} = e^{iαφ}·e^{2πiα} と、Mathlib の exp z = 1 ⇔ z ∈ 2πiℤ）。",
+      "lean_statement": "theorem MathGarden.CylindricalShellToAharonovBohm.single_valued_iff_integer (α : ℝ) : (∀ φ : ℝ, Complex.exp (Complex.I * α * (φ + 2 * Real.pi)) = Complex.exp (Complex.I * α * φ)) ↔ ∃ m : ℤ, α = m",
+      "lean_decl": "MathGarden.CylindricalShellToAharonovBohm.single_valued_iff_integer",
+      "file": "MathGarden/CylindricalShellToAharonovBohm/QuantizationConditions.lean",
+      "level": "L1",
+      "not_covered_ja": "Lean は Φ(φ) = e^{iαφ} の一項だけを扱った。記事の一般形 Φ(φ) = A e^{iαφ} + B e^{−iαφ}（A, B が両方 0 でない場合を含む）で一価性から α ∈ ℤ を出す所と、角度方向の方程式 d²Φ/dφ² = −α²Φ（変数分離）は確かめていない。§1 の L_z = −iħ ∂_φ も確かめていない。"
+    },
+    {
+      "id": "cylindrical-shell-to-aharonov-bohm/boundary-condition-determinant",
+      "article_slug": "cylindrical-shell-to-aharonov-bohm",
+      "article_section": "第4節 ── 境界条件 R(a)=R(b)=0 から行列式条件へ",
+      "article_quote_ja": "A J_m(ka) + B N_m(ka) = 0, A J_m(kb) + B N_m(kb) = 0. (A,B) についての斉次連立 1 次方程式だ。非自明解 (A,B)≠(0,0) が存在するには、係数行列の行列式が消える必要がある … J_m(ka) N_m(kb) − J_m(kb) N_m(ka) = 0.",
+      "claim_ja": "任意の実数 Ja, Na, Jb, Nb について、係数行列 [[Ja, Na], [Jb, Nb]] がある 0 でないベクトル (A, B) を 0 に送る（A·Ja + B·Na = 0 かつ A·Jb + B·Nb = 0）ことと、Ja·Nb − Jb·Na = 0 は同値（必要条件だけでなく十分条件でもある）。",
+      "lean_statement": "theorem MathGarden.CylindricalShellToAharonovBohm.nontrivial_solution_iff_det (Ja Na Jb Nb : ℝ) : (∃ v ≠ 0, !![Ja, Na; Jb, Nb] *ᵥ v = 0) ↔ Ja * Nb - Jb * Na = 0",
+      "lean_decl": "MathGarden.CylindricalShellToAharonovBohm.nontrivial_solution_iff_det",
+      "file": "MathGarden/CylindricalShellToAharonovBohm/QuantizationConditions.lean",
+      "level": "L1",
+      "not_covered_ja": "中身は Mathlib の Matrix.exists_mulVec_eq_zero_iff（整域上の正方行列で、0 でないベクトルを 0 に送る ⇔ 行列式 0）と det_fin_two_of。ベッセル関数は Mathlib に見つからなかったので、J_m(ka) などを任意の実数に置いた（ベッセル方程式・J_m と N_m が独立な解であること・§5 の固有値 k_{m,n} が離散的に並ぶことは確かめていない）。"
+    },
+    {
+      "id": "cylindrical-shell-to-aharonov-bohm/aharonov-bohm-period",
+      "article_slug": "cylindrical-shell-to-aharonov-bohm",
+      "article_section": "第6節 ── 次回への接続:磁束で角運動量の有効値がずれる（単純なリング模型）",
+      "article_quote_ja": "エネルギーは E_m(Φ_B) = ħ^2/(2MR^2) (m − qΦ_B/h)^2 となり、整数 m ごとに磁束 Φ_B の関数として放物線が並び … 磁束を変化させると、エネルギー準位(の集合)が周期 h/|q| で振動する",
+      "claim_ja": "q ≠ 0, h ≠ 0 のとき、E_m(Φ) = ħ^2/(2MR^2)(m − qΦ/h)^2 について E_m(Φ + h/q) = E_{m−1}(Φ)。したがって準位の集合 {E_m(Φ) | m ∈ ℤ} は Φ を h/q だけずらしても変わらない。",
+      "lean_statement": "theorem MathGarden.CylindricalShellToAharonovBohm.energy_levels_periodic (hbar M R q h : ℝ) (hq : q ≠ 0) (hh : h ≠ 0) (Φ : ℝ) : Set.range (fun m : ℤ => ringEnergy hbar M R q h m (Φ + h / q)) = Set.range (fun m : ℤ => ringEnergy hbar M R q h m Φ)",
+      "lean_decl": "MathGarden.CylindricalShellToAharonovBohm.energy_levels_periodic",
+      "file": "MathGarden/CylindricalShellToAharonovBohm/QuantizationConditions.lean",
+      "level": "L1",
+      "not_covered_ja": "記事の周期 h/|q| に対し Lean は h/q だけずらすことを示した（q < 0 なら −h/q だけずらすのと同じ集合なので、周期 |h/q| になる。その言い換えは書いていない）。h/q が最小の周期であることは確かめていない。エネルギーの式そのもの（最小結合・A_φ = Φ_B/(2πr) から m → m − qΦ_B/h が出る所）と、円筒シェルの場合のベッセル次数のずれは確かめていない。"
     }
   ]
 }

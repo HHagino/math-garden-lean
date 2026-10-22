@@ -464,6 +464,54 @@
       "file": "MathGarden/FiniteGroupFourierPeterWeyl/MaschkeCharactersDFT.lean",
       "level": "L1",
       "not_covered_ja": "Mathlib の DFT は e(−jk)（記事は ω^{jk}）で、反転は e(jk)（記事は ω^{−jk}）＝符号の置き方が記事と逆（j を −j に替えれば同じ式）。記事の形そのもの（符号を記事どおりにした式）は書いていない。C[Z/n] ≅ C×…×C という環の分解、可換なら同時対角化という説明は確かめていない。"
+    },
+    {
+      "id": "galois-as-linear-algebra-eigenspace/kummer-root-powers-are-eigenvectors",
+      "article_slug": "galois-as-linear-algebra-eigenspace",
+      "article_section": "§3 Kummer 拡大:対角化される演算子",
+      "article_quote_ja": "σ(α^j) = σ(α)^j = (ζ_n α)^j = ζ_n^j · α^j. … α^j は演算子 σ の固有ベクトルで、固有値は ζ_n^j。",
+      "claim_ja": "K が 1 の原始 n 乗根を含み X^n − a が既約のとき、L = K[X]/(X^n − a) の根 α について、どの K 上の自己同型 σ にも c ∈ K があって σ(α^j) = c^j · α^j（すべての j）。",
+      "lean_statement": "theorem MathGarden.GaloisAsLinearAlgebraEigenspace.root_pow_eigenvector (hζ : (primitiveRoots n K).Nonempty) {a : K} (H : Irreducible (X ^ n - C a)) (σ : AdjoinRoot (X ^ n - C a) ≃ₐ[K] AdjoinRoot (X ^ n - C a)) (j : ℕ) : ∃ c : K, σ (AdjoinRoot.root (X ^ n - C a) ^ j) = c ^ j • AdjoinRoot.root (X ^ n - C a) ^ j",
+      "lean_decl": "MathGarden.GaloisAsLinearAlgebraEigenspace.root_pow_eigenvector",
+      "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
+      "level": "L1",
+      "not_covered_ja": "c が 1 の n 乗根であること（Mathlib の autAdjoinRootXPowSubCEquiv では c は対応する η）は定理の文には入れていない。{1, α, …, α^{n−1}} が基底で σ が diag(1, ζ, …, ζ^{n−1}) になること、§5 の L = ⊕ L_χ の分解、正規基底定理は確かめていない。記事の「K の標数は n を割らない」は、Lean では 1 の原始 n 乗根が K にあるという仮定に含まれる形で、別の仮定としては書いていない。"
+    },
+    {
+      "id": "galois-as-linear-algebra-eigenspace/kummer-galois-group-roots-of-unity",
+      "article_slug": "galois-as-linear-algebra-eigenspace",
+      "article_section": "§3 Kummer 拡大:対角化される演算子",
+      "article_quote_ja": "この仮定のもとで L/K は Galois 拡大で、[L:K] = n、Galois 群 G は位数 n の巡回群になる。",
+      "claim_ja": "K が 1 の原始 n 乗根を含み X^n − a が既約なら、K の 1 の n 乗根の群と Aut_K(K[X]/(X^n − a)) は群として同型。",
+      "lean_statement": "def autAdjoinRootXPowSubCEquiv [NeZero n] (hζ : (primitiveRoots n K).Nonempty) (H : Irreducible (X ^ n - C a)) : rootsOfUnity n K ≃* (K[n√a] ≃ₐ[K] K[n√a])",
+      "lean_decl": "autAdjoinRootXPowSubCEquiv",
+      "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
+      "level": "L0",
+      "not_covered_ja": "1 の n 乗根の群が位数 n の巡回群であること、[L:K] = n、L/K が Galois であることは、このファイルの example にしていない（Mathlib には isCyclic_of_isSplittingField_X_pow_sub_C などがある）。"
+    },
+    {
+      "id": "galois-as-linear-algebra-eigenspace/characters-linearly-independent",
+      "article_slug": "galois-as-linear-algebra-eigenspace",
+      "article_section": "§4 固有値の正体は指標である",
+      "article_quote_ja": "（§4 の主張の土台）有限群の異なる指標は一次独立。",
+      "claim_ja": "モノイド G から整域 L への準同型（指標）の族は、L 上の G → L の関数として一次独立（Dedekind）。",
+      "lean_statement": "theorem linearIndependent_monoidHom (G : Type*) [MulOneClass G] (L : Type*) [CommRing L] [IsDomain L] : LinearIndependent L (M := G → L) (fun f => f : (G →* L) → G → L)",
+      "lean_decl": "linearIndependent_monoidHom",
+      "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
+      "level": "L0",
+      "not_covered_ja": "article_quote_ja は記事の文の写しではなく、§4 が拠っている標準事実をこちらで要約したもの（記事の §4 の本文に同じ一文はない）。指標ごとの固有空間 L_χ への直和分解（§5）は Mathlib に見つからず確かめていない。"
+    },
+    {
+      "id": "galois-as-linear-algebra-eigenspace/cyclotomic-galois-units-zmod",
+      "article_slug": "galois-as-linear-algebra-eigenspace",
+      "article_section": "§9 展望（円分拡大）",
+      "article_quote_ja": "円分拡大。Q(ζ_n) の Galois 群は (Z/nZ)^× と同型で、このアーベル群の指標がまさに Dirichlet 指標だ。",
+      "claim_ja": "ℚ(ζ_n)（Mathlib の CyclotomicField n ℚ）の ℚ 上の Galois 群は (ℤ/n)^× と群として同型（n ≥ 1）。",
+      "lean_statement": "def IsCyclotomicExtension.autEquivPow (h : Irreducible (cyclotomic n K)) : Gal(L/K) ≃* (ZMod n)ˣ に L = CyclotomicField n ℚ と cyclotomic.irreducible_rat を入れたもの",
+      "lean_decl": "IsCyclotomicExtension.autEquivPow",
+      "file": "MathGarden/GaloisAsLinearAlgebraEigenspace/KummerEigenvectors.lean",
+      "level": "L0",
+      "not_covered_ja": "Dirichlet 指標との対応、n = 5 で Q 上の固有直線に割れない話、C ⊗ Q(ζ_n) の固有空間分解は確かめていない。"
     }
   ]
 }

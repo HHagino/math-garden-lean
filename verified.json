@@ -824,6 +824,54 @@
       "file": "MathGarden/SpecialRelativityAsCompletionOfElectromagnetism/LorentzBoostLightSpeed.lean",
       "level": "L1",
       "not_covered_ja": "確かめたのは光の信号の運動学（速さが c − v になる）だけ。記事の本題「マクスウェル方程式をガリレイ変換で移すと方程式の形が変わる」は確かめていない。エーテル仮説・マイケルソン=モーリーの実験の記述は扱っていない。"
+    },
+    {
+      "id": "poisson-bracket-jacobian-phase-space/bracket-is-jacobian-determinant",
+      "article_slug": "poisson-bracket-jacobian-phase-space",
+      "article_section": "1. 導入:手書きの式に出会う／2–3. まず多変数微積分として:行列式とヤコビアン",
+      "article_quote_ja": "[F, G] = (∂F/∂q)(∂G/∂p) − (∂G/∂q)(∂F/∂p) = |F_q F_p; G_q G_p| = ∂(F, G)/∂(q, p).",
+      "claim_ja": "q, p の実係数多項式 F, G について、ポアソン括弧 {F, G} = F_q G_p − F_p G_q は 2×2 行列 [[F_q, F_p], [G_q, G_p]] の行列式に等しい（偏微分は Mathlib の MvPolynomial.pderiv）。",
+      "lean_statement": "theorem MathGarden.PoissonBracketJacobianPhaseSpace.bracket_eq_det (F G : MvPolynomial (Fin 2) ℝ) : bracket F G = Matrix.det !![pderiv 0 F, pderiv 1 F; pderiv 0 G, pderiv 1 G]（bracket F G := pderiv 0 F * pderiv 1 G - pderiv 1 F * pderiv 0 G）",
+      "lean_decl": "MathGarden.PoissonBracketJacobianPhaseSpace.bracket_eq_det",
+      "file": "MathGarden/PoissonBracketJacobianPhaseSpace/PolynomialBrackets.lean",
+      "level": "L1",
+      "not_covered_ja": "物理量は多項式に限った（記事は滑らかな関数）。行列式を「写像 (q,p)↦(F,G) のヤコビアン」「面積要素の倍率 dF dG = |∂(F,G)/∂(q,p)| dq dp」と読む所（積分の変数変換）は確かめていない。記事の行列式の式そのもの（2×2 の展開）だけを確かめた。"
+    },
+    {
+      "id": "poisson-bracket-jacobian-phase-space/canonical-brackets",
+      "article_slug": "poisson-bracket-jacobian-phase-space",
+      "article_section": "5–6. {q,p}=1 と、そこに圧縮されているもの",
+      "article_quote_ja": "F=q,G=p を入れると {q,p}=q_q p_p − q_p p_q=1、同様に {p,q}=−1, {q,q}={p,p}=0。",
+      "claim_ja": "上のポアソン括弧で {q, p} = 1、{p, q} = −1、{q, q} = 0、{p, p} = 0（q, p は 2 変数多項式環の変数）。",
+      "lean_statement": "theorem MathGarden.PoissonBracketJacobianPhaseSpace.canonical_brackets : bracket coordQ coordP = 1 ∧ bracket coordP coordQ = -1 ∧ bracket coordQ coordQ = 0 ∧ bracket coordP coordP = 0（coordQ := X 0, coordP := X 1 : MvPolynomial (Fin 2) ℝ）",
+      "lean_decl": "MathGarden.PoissonBracketJacobianPhaseSpace.canonical_brackets",
+      "file": "MathGarden/PoissonBracketJacobianPhaseSpace/PolynomialBrackets.lean",
+      "level": "L1",
+      "not_covered_ja": "{q,p}=1 に「圧縮されている」とされる (i) シンプレクティック形式 ω=dq∧dp、(ii) 正準変換、(iii) 量子化の交換関係 [q̂,p̂]=iħ は確かめていない。"
+    },
+    {
+      "id": "poisson-bracket-jacobian-phase-space/hamilton-equations",
+      "article_slug": "poisson-bracket-jacobian-phase-space",
+      "article_section": "7. ハミルトニアンによる時間発展",
+      "article_quote_ja": "∂F/∂t=0 なら Ḟ={F,H}。F=q で q̇={q,H}=∂H/∂p、F=p で ṗ={p,H}=−∂H/∂q ── ハミルトン方程式が再現される。",
+      "claim_ja": "任意の多項式 H について {q, H} = ∂H/∂p、{p, H} = −∂H/∂q。",
+      "lean_statement": "theorem MathGarden.PoissonBracketJacobianPhaseSpace.hamilton_equations (H : MvPolynomial (Fin 2) ℝ) : bracket coordQ H = pderiv 1 H ∧ bracket coordP H = -pderiv 0 H",
+      "lean_decl": "MathGarden.PoissonBracketJacobianPhaseSpace.hamilton_equations",
+      "file": "MathGarden/PoissonBracketJacobianPhaseSpace/PolynomialBrackets.lean",
+      "level": "L1",
+      "not_covered_ja": "確かめたのは括弧の右辺の計算だけ。時間発展 dF/dt = {F,H} + ∂F/∂t（軌道に沿った時間微分）や、§8 の保存量 {F,H}=0 ⇒ F 保存は確かめていない（時間の関数としての q(t), p(t) は Lean では扱っていない）。H は多項式に限った。"
+    },
+    {
+      "id": "poisson-bracket-jacobian-phase-space/cubic-brackets",
+      "article_slug": "poisson-bracket-jacobian-phase-space",
+      "article_section": "9. 量子力学の交換子との関係 ── そして、その対応の限界",
+      "article_quote_ja": "{q^3,p^3}=9q^2p^2 から q^2p^2 を量子化した結果と、{q^2p,qp^2}=3q^2p^2 から量子化した結果が ħ^2 の項だけ食い違う。",
+      "claim_ja": "{q^3, p^3} = 9 q^2 p^2、{q^2 p, q p^2} = 3 q^2 p^2（多項式の偏微分で計算）。",
+      "lean_statement": "theorem MathGarden.PoissonBracketJacobianPhaseSpace.cubic_brackets : bracket (coordQ ^ 3) (coordP ^ 3) = 9 * coordQ ^ 2 * coordP ^ 2 ∧ bracket (coordQ ^ 2 * coordP) (coordQ * coordP ^ 2) = 3 * coordQ ^ 2 * coordP ^ 2",
+      "lean_decl": "MathGarden.PoissonBracketJacobianPhaseSpace.cubic_brackets",
+      "file": "MathGarden/PoissonBracketJacobianPhaseSpace/PolynomialBrackets.lean",
+      "level": "L1",
+      "not_covered_ja": "確かめたのはポアソン括弧の二つの値だけ。それを量子化すると ħ^2 の項で食い違うこと、Groenewold–van Hove の定理（全多項式で整合する量子化写像は存在しない）は確かめていない（Mathlib に見つからなかった）。"
     }
   ]
 }

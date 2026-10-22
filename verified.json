@@ -656,6 +656,54 @@
       "file": "MathGarden/ClimbingWithAlgebraOfOpens/FramesAndCovers.lean",
       "level": "L0",
       "not_covered_ja": "記事の「良い空間（sober な空間）ではフレームから点を復元すると元に戻る」（随伴の単位が同相になること）は確かめていない。二元フレーム {0,1} は Lean では Prop。Stone 双対、§3 の site・topos、§4 の étale の話（別記事の項目 zariski-le-etale を参照）は扱っていない。"
+    },
+    {
+      "id": "spherical-laplacian-from-riemann-metric/line-element",
+      "article_slug": "spherical-laplacian-from-riemann-metric",
+      "article_section": "第2節 ── 球座標の計量",
+      "article_quote_ja": "3 次元ユークリッド空間を球座標 x = r sinθ cosφ, y = r sinθ sinφ, z = r cosθ で表す。微小変位を計算すると(連鎖律と三角公式を素直に展開すれば)、ds^2 = dr^2 + r^2 dθ^2 + r^2 sin^2θ dφ^2.",
+      "claim_ja": "dx・dy・dz を dr・dθ・dφ の一次式（係数は x・y・z の r・θ・φ による偏微分）で書くと、dx^2 + dy^2 + dz^2 = dr^2 + r^2 dθ^2 + r^2 sin^2θ dφ^2 が恒等的に成り立つ（sin^2+cos^2=1 を θ と φ で使う）。",
+      "lean_statement": "theorem MathGarden.SphericalLaplacianFromRiemannMetric.line_element (r θ φ dr dθ dφ : ℝ) : (sin θ * cos φ * dr + r * cos θ * cos φ * dθ - r * sin θ * sin φ * dφ) ^ 2 + (sin θ * sin φ * dr + r * cos θ * sin φ * dθ + r * sin θ * cos φ * dφ) ^ 2 + (cos θ * dr - r * sin θ * dθ) ^ 2 = dr ^ 2 + r ^ 2 * dθ ^ 2 + r ^ 2 * sin θ ^ 2 * dφ ^ 2",
+      "lean_decl": "MathGarden.SphericalLaplacianFromRiemannMetric.line_element",
+      "file": "MathGarden/SphericalLaplacianFromRiemannMetric/MetricAndJacobian.lean",
+      "level": "L1",
+      "not_covered_ja": "dx・dy・dz の係数（x・y・z の偏微分）は手で微分して書いたもので、それが x = r sinθ cosφ などの写像の微分であることは Lean では確かめていない。確かめたのは「その係数で書いた二次式が ds^2 の形になる」という代数の恒等式だけ。計量テンソルを一般の座標変換から定義する話（§1）は扱っていない。"
+    },
+    {
+      "id": "spherical-laplacian-from-riemann-metric/inverse-metric",
+      "article_slug": "spherical-laplacian-from-riemann-metric",
+      "article_section": "第2節 ── 球座標の計量",
+      "article_quote_ja": "したがって計量テンソルは g_ij = diag(1, r^2, r^2 sin^2θ)、逆計量(逆行列)は g^ij = diag(1, 1/r^2, 1/(r^2 sin^2θ)).",
+      "claim_ja": "r ≠ 0 かつ sin θ ≠ 0 のとき、3×3 の対角行列 diag(1, r^2, r^2 sin^2θ) の逆行列は diag(1, 1/r^2, 1/(r^2 sin^2θ)) である。",
+      "lean_statement": "theorem MathGarden.SphericalLaplacianFromRiemannMetric.inverse_metric {r θ : ℝ} (hr : r ≠ 0) (hθ : Real.sin θ ≠ 0) : (metric r θ)⁻¹ = Matrix.diagonal ![1, 1 / r ^ 2, 1 / (r ^ 2 * Real.sin θ ^ 2)]（metric r θ := Matrix.diagonal ![1, r ^ 2, r ^ 2 * Real.sin θ ^ 2]）",
+      "lean_decl": "MathGarden.SphericalLaplacianFromRiemannMetric.inverse_metric",
+      "file": "MathGarden/SphericalLaplacianFromRiemannMetric/MetricAndJacobian.lean",
+      "level": "L1",
+      "not_covered_ja": "記事は r = 0 や sin θ = 0（原点と z 軸の上）の除外を書いていない。Lean は r ≠ 0・sin θ ≠ 0 を仮定した（そこでは逆行列が無い）。§3 の「板書の行列は逆計量だった」という読み取りと、§5 のラプラシアンの公式への代入・その結果の式は確かめていない。"
+    },
+    {
+      "id": "spherical-laplacian-from-riemann-metric/det-sqrt-jacobian",
+      "article_slug": "spherical-laplacian-from-riemann-metric",
+      "article_section": "第4節 ── 計量の行列式と √|g| = r^2 sinθ",
+      "article_quote_ja": "|g| = det(g_ij) = 1·r^2·r^2 sin^2θ = r^4 sin^2θ. したがって √|g| = r^2 sinθ. ここで一拍置く。r^2 sinθ は、球座標で体積要素を書いたときに出てくる、あのヤコビアンである: dV = r^2 sinθ dr dθ dφ.",
+      "claim_ja": "det diag(1, r^2, r^2 sin^2θ) = r^4 sin^2θ。0 ≤ θ ≤ π（余緯度）なら √|g| = r^2 sinθ。さらにそれは、(r, θ, φ) ↦ (r sinθ cosφ, r sinθ sinφ, r cosθ) の偏微分を並べた 3×3 のヤコビ行列の行列式（det_jacobian で r^2 sinθ と計算した）に等しい。",
+      "lean_statement": "theorem MathGarden.SphericalLaplacianFromRiemannMetric.det_sqrt_eq_jacobian (r : ℝ) {θ : ℝ} (h0 : 0 ≤ θ) (hπ : θ ≤ Real.pi) (φ : ℝ) : (metric r θ).det = r ^ 4 * Real.sin θ ^ 2 ∧ Real.sqrt (metric r θ).det = r ^ 2 * Real.sin θ ∧ Real.sqrt (metric r θ).det = (jacobian r θ φ).det",
+      "lean_decl": "MathGarden.SphericalLaplacianFromRiemannMetric.det_sqrt_eq_jacobian",
+      "file": "MathGarden/SphericalLaplacianFromRiemannMetric/MetricAndJacobian.lean",
+      "level": "L1",
+      "not_covered_ja": "記事は √|g| = r^2 sinθ を条件なしで書いているが、sin θ < 0 になる θ では √|g| = r^2|sinθ| なので、Lean は 0 ≤ θ ≤ π（記事が §2 で言う「北極から測った角」の範囲）を仮定した。ヤコビ行列は手で偏微分して書いたもので、写像の微分であることは確かめていない。体積要素 dV = r^2 sinθ dr dθ dφ（積分の変数変換）と、§4 の「√|g| は座標が作る平行六面体の体積で、一般にヤコビアンと一致する」という一般の主張は確かめていない（確かめたのは球座標のこの一例）。"
+    },
+    {
+      "id": "spherical-laplacian-from-riemann-metric/polar-2d",
+      "article_slug": "spherical-laplacian-from-riemann-metric",
+      "article_section": "第6節 ── 2 次元極座標との対比",
+      "article_quote_ja": "念のため、本物の 2 次元極座標を確認しておく。x = r cosθ, y = r sinθ で ds^2 = dr^2 + r^2 dθ^2. 計量と逆計量、行列式は g_ij = diag(1, r^2), g^ij = diag(1, 1/r^2), √|g| = r.",
+      "claim_ja": "r ≥ 0 のとき √det diag(1, r^2) = r。そしてそれは、Mathlib が極座標の写像 (r, θ) ↦ (r cosθ, r sinθ) の微分（fderivPolarCoordSymm、hasFDerivAt_polarCoord_symm で本当に微分であることが示されている）について示した行列式 r と一致する。",
+      "lean_statement": "theorem MathGarden.SphericalLaplacianFromRiemannMetric.polar_sqrt_det_eq_jacobian {r : ℝ} (hr : 0 ≤ r) (θ : ℝ) : Real.sqrt (Matrix.diagonal ![1, r ^ 2] : Matrix (Fin 2) (Fin 2) ℝ).det = r ∧ (fderivPolarCoordSymm (r, θ)).det = r",
+      "lean_decl": "MathGarden.SphericalLaplacianFromRiemannMetric.polar_sqrt_det_eq_jacobian",
+      "file": "MathGarden/SphericalLaplacianFromRiemannMetric/MetricAndJacobian.lean",
+      "level": "L1",
+      "not_covered_ja": "後半（ヤコビアン = r）は Mathlib の det_fderivPolarCoordSymm をそのまま使った。2 次元の ds^2 = dr^2 + r^2 dθ^2 と逆計量 diag(1, 1/r^2)、§6 の 2 次元ラプラシアンの式、3 次元との対比の箇条は確かめていない。r ≥ 0 は Lean で仮定した（記事は書いていない）。"
     }
   ]
 }

@@ -800,6 +800,30 @@
       "file": "MathGarden/RelativityAlgebraicRtaCliffordHurwitz/LorentzCliffordQuaternion.lean",
       "level": "L1",
       "not_covered_ja": "∇ を虚四元数値の演算子と見て div・curl が出る話、Maxwell 方程式（dF=0, d⋆F=⋆J と ∇F=J）、§5 の Hurwitz の定理（実ノルム多元体は ℝ・ℂ・ℍ・𝕆 だけ）と 3・7 次元の外積、§10 の Aut(ℍ) ≅ SO(3)・G2 は確かめていない（Hurwitz の定理は下調べで Mathlib に見つからなかった）。"
+    },
+    {
+      "id": "special-relativity-as-completion-of-electromagnetism/lorentz-keeps-light-speed",
+      "article_slug": "special-relativity-as-completion-of-electromagnetism",
+      "article_section": "5. ローレンツ変換と、皆が「何か変だ」と感じていた時代／6. アインシュタインの突破",
+      "article_quote_ja": "t' = γ(t − v x / c^2), x' = γ(x − v t), y' = y, z' = z, γ = 1/√(1 − v^2/c^2).（§5）… c が不変であるとは、それを生み出す媒質ではなく、時空そのものの構造から来る不変量 だ、ということになる。（§6）",
+      "claim_ja": "c > 0、v^2 < c^2 のとき、記事のローレンツ変換で、x 方向に進む光 x = ct は x' = ct' に写り、どの向きの光（x^2 + y^2 + z^2 = c^2 t^2）も x'^2 + y'^2 + z'^2 = c^2 t'^2 に写る（光の速さ c は変換で変わらない）。証明の中で c^2 t'^2 − x'^2 = c^2 t^2 − x^2（interval_invariant）を示した。",
+      "lean_statement": "theorem MathGarden.SpecialRelativityAsCompletionOfElectromagnetism.lorentz_keeps_light_speed (c v t x y z : ℝ) (hc : 0 < c) (hv : v ^ 2 < c ^ 2) : boostX c v t (c * t) = c * boostT c v t (c * t) ∧ (x ^ 2 + y ^ 2 + z ^ 2 = c ^ 2 * t ^ 2 → boostX c v t x ^ 2 + y ^ 2 + z ^ 2 = c ^ 2 * boostT c v t x ^ 2)（boostT c v t x := γ * (t - v * x / c ^ 2)、boostX c v t x := γ * (x - v * t)、γ := 1 / √(1 - v ^ 2 / c ^ 2)）",
+      "lean_decl": "MathGarden.SpecialRelativityAsCompletionOfElectromagnetism.lorentz_keeps_light_speed",
+      "file": "MathGarden/SpecialRelativityAsCompletionOfElectromagnetism/LorentzBoostLightSpeed.lean",
+      "level": "L1",
+      "not_covered_ja": "記事は |v| < c（v^2 < c^2）と c > 0 を書いていない（γ が実数になるための条件として Lean で仮定した）。§5 の「これらの変換のもとでは、マクスウェル方程式が形を保つ」と §2 の波動方程式・c^2 = 1/(μ0 ε0) は確かめていない（Maxwell 方程式は Mathlib に無い）。§6 の「時空そのものの構造から来る不変量」という解釈、§7 の電磁場テンソルの成分の混ざり方、ローレンツ変換の群構造は確かめていない。"
+    },
+    {
+      "id": "special-relativity-as-completion-of-electromagnetism/galilean-changes-light-speed",
+      "article_slug": "special-relativity-as-completion-of-electromagnetism",
+      "article_section": "4. ガリレイ変換との不整合:この光速は誰にとっての速度なのか",
+      "article_quote_ja": "ニュートン力学では、別の慣性系へ移るときに ガリレイ変換 を使う:時間 t は同じ、位置だけ x' = x − v t。この変換のもとでは、速度は単純に足し算で変わる。… c という速度が、観測者によって変わってしまうことになる。",
+      "claim_ja": "ガリレイ変換 x' = x − vt, t' = t で光の信号 x = ct を写すと x' = (c − v) t' になり、v ≠ 0 なら t ≠ 0 の時刻で x' ≠ c t'（速さが c でなくなる）。",
+      "lean_statement": "theorem MathGarden.SpecialRelativityAsCompletionOfElectromagnetism.galilean_changes_light_speed (c v t : ℝ) (hv : v ≠ 0) (ht : t ≠ 0) : c * t - v * t = (c - v) * t ∧ c * t - v * t ≠ c * t",
+      "lean_decl": "MathGarden.SpecialRelativityAsCompletionOfElectromagnetism.galilean_changes_light_speed",
+      "file": "MathGarden/SpecialRelativityAsCompletionOfElectromagnetism/LorentzBoostLightSpeed.lean",
+      "level": "L1",
+      "not_covered_ja": "確かめたのは光の信号の運動学（速さが c − v になる）だけ。記事の本題「マクスウェル方程式をガリレイ変換で移すと方程式の形が変わる」は確かめていない。エーテル仮説・マイケルソン=モーリーの実験の記述は扱っていない。"
     }
   ]
 }

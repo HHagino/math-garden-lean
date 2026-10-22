@@ -2,6 +2,9 @@ import Mathlib.LinearAlgebra.CliffordAlgebra.Basic
 import Mathlib.LinearAlgebra.QuadraticForm.Basic
 import Mathlib.LinearAlgebra.CrossProduct
 import Mathlib.Algebra.Quaternion
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Data.Real.Basic
+import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Ring
 
 /-!

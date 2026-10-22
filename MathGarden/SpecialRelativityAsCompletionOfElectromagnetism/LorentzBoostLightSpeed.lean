@@ -72,7 +72,6 @@ theorem light_speed_invariant (c v t : ℝ) (hc : 0 < c) :
   have hc0 : c ≠ 0 := hc.ne'
   unfold boostT boostX
   field_simp
-  ring
 
 /-- 光の信号（x² + y² + z² ＝ c²t²）は、ローレンツ変換（y' ＝ y, z' ＝ z）のあとも x'² + y'² + z'² ＝ c²t'²。 -/
 theorem light_cone_preserved (c v t x y z : ℝ) (hc : 0 < c) (hv : v ^ 2 < c ^ 2)

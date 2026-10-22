@@ -46,7 +46,7 @@ def JoinGenerates {α : Type*} [CompleteLattice α] (S : Set α) : Prop :=
   ∀ a : α, ∃ T ⊆ S, a = sSup T
 
 /-- §2：フレームの全射準同型で、S が join 生成するなら、その像が商を join 生成する。 -/
-theorem joinGenerates_image {α β : Type*} [Frame α] [Frame β] (f : FrameHom α β)
+theorem joinGenerates_image {α β : Type*} [Order.Frame α] [Order.Frame β] (f : FrameHom α β)
     (hf : Function.Surjective f) {S : Set α} (hS : JoinGenerates S) : JoinGenerates (f '' S) := by
   intro b
   obtain ⟨a, rfl⟩ := hf b
@@ -54,7 +54,7 @@ theorem joinGenerates_image {α β : Type*} [Frame α] [Frame β] (f : FrameHom 
   exact ⟨f '' T, Set.image_mono hTS, map_sSup f T⟩
 
 /-- §2：可算生成性はフレームの全射（商）に遺伝する。 -/
-theorem countably_generated_of_surjective {α β : Type*} [Frame α] [Frame β] (f : FrameHom α β)
+theorem countably_generated_of_surjective {α β : Type*} [Order.Frame α] [Order.Frame β] (f : FrameHom α β)
     (hf : Function.Surjective f) (h : ∃ S : Set α, S.Countable ∧ JoinGenerates S) :
     ∃ S : Set β, S.Countable ∧ JoinGenerates S := by
   obtain ⟨S, hSc, hS⟩ := h

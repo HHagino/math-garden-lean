@@ -272,6 +272,30 @@
       "file": "MathGarden/PoissonSummationPeterWeyl/ZetaFunctionalEquation.lean",
       "level": "L0",
       "not_covered_ja": "記事の ξ(s)（Λ に s(s−1)/2 を掛けたもの）そのものではなく Mathlib の Λ。記事の核心である「関数等式は Poisson 和公式を Mellin 変換した姿」（導出）、Poisson 和公式・テータ関数の変換公式との対応（Mathlib の SchwartzMap.tsum_eq_tsum_fourier などは参照していない）、§2 の有限群の版は確かめていない。"
+    },
+    {
+      "id": "hasse-principle-hilbert-symbol-rational-points/no-rational-solution-3x2-5y2-1",
+      "article_slug": "hasse-principle-hilbert-symbol-rational-points",
+      "article_section": "§8 手で動かす ── a=3, b=−5 を判定する",
+      "article_quote_ja": "p=2 と p=5 で (3,-5)_v=-1 が出た。すべての v で +1 ではないので、ハッセ=ミンコフスキーにより 3x^2-5y^2=1 は有理数解を持たない。（表の p=5 の行：5 進局所計算:3 は 5 の平方非剰余 ⇒ 解なし）",
+      "claim_ja": "有理数 x, y について 3x^2 - 5y^2 ≠ 1（記事の結論）。証明は Hilbert 記号を使わず、分母を払って整数の 3a^2 - 5b^2 = c^2（c ≠ 0）に落とし、3 が 5 を法として平方でないことから a, b, c がすべて 5 で割れることを示して |c| の無限降下で矛盾を出す。部品として「5 を法として 3 は平方でない」も別の定理にした。",
+      "lean_statement": "theorem MathGarden.HassePrincipleHilbertSymbolRationalPoints.no_rat_solution (x y : ℚ) : 3 * x ^ 2 - 5 * y ^ 2 ≠ 1",
+      "lean_decl": "MathGarden.HassePrincipleHilbertSymbolRationalPoints.no_rat_solution",
+      "file": "MathGarden/HassePrincipleHilbertSymbolRationalPoints/NoRationalPoint.lean",
+      "level": "L1",
+      "not_covered_ja": "記事の道筋（Hilbert 記号 (3,-5)_v の 4 つの値・積公式・ハッセ＝ミンコフスキーの定理）は確かめていない。Lean が確かめたのは結論（有理数解が無い）と、p=5 の行の理由のうち「3 は 5 を法として平方でない」（three_not_square_mod_five）だけ。p=2 の行（mod 8 の計算）も確かめていない。Mathlib v4.30.0 に Hilbert 記号は見つからなかった（下調べ 2026-10-14）。"
+    },
+    {
+      "id": "epic-surjection-cover-distinction/discrete-to-indiscrete-epi-mono-not-iso-not-effective",
+      "article_slug": "epic-surjection-cover-distinction",
+      "article_section": "§4 例 2:離散 ℕ から密着 ℕ への恒等写像 ── 全射 epic だが cover でない",
+      "article_quote_ja": "f は連続である。… f は monic である。… f は epic である。… f は同相写像(iso)ではない。… f が全射連続写像であるにもかかわらず、商写像(quotient map)ではない … Top で cover を商写像(この圏の effective epi に当たる)と読めば、全射 epic であっても cover とは限らない",
+      "claim_ja": "台集合 ℕ に離散位相（⊥）と密着位相（⊤）を載せた二つの型の間の、台の上で恒等の連続写像を TopCat の射と見ると、epic かつ monic だが、同型でなく、effective epi でもない。部品として、逆向きの台恒等写像が連続でないこと（inverse_not_continuous）と、商写像でないこと（toIndisc_not_isQuotientMap）も別の定理にした。",
+      "lean_statement": "theorem MathGarden.EpicSurjectionCoverDistinction.discrete_to_indiscrete_summary : Epi idDiscToIndisc ∧ Mono idDiscToIndisc ∧ ¬ IsIso idDiscToIndisc ∧ ¬ EffectiveEpi idDiscToIndisc",
+      "lean_decl": "MathGarden.EpicSurjectionCoverDistinction.discrete_to_indiscrete_summary",
+      "file": "MathGarden/EpicSurjectionCoverDistinction/DiscreteToIndiscrete.lean",
+      "level": "L1",
+      "not_covered_ja": "記事 §5 以降の読み（cover ≈ 降下の一意性＋存在）、図の包含関係、「Top は balanced でない」という一般の言い方は確かめていない（この一例だけ）。「cover を商写像と読む」は記事の読み方で、Lean が確かめたのは TopCat の effective epi でないこと（Mathlib の TopCat.effectiveEpi_iff_isQuotientMap による言い換え）。"
     }
   ]
 }

@@ -620,6 +620,42 @@
       "file": "MathGarden/WhyZariskiCannotCountPoints/ProjectiveLineAndEtale.lean",
       "level": "L0",
       "not_covered_ja": "「étale の被覆は Zariski 局所では同相でない（真に多い）」こと、étale コホモロジー・ℓ 進コホモロジー・Artin の比較定理・Weil 予想（Deligne）は確かめていない。Mathlib の etaleTopology は大 étale site（スキーム全体の圏の上）で、記事の「X の étale site」（小 site）とは舞台が違う。"
+    },
+    {
+      "id": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02/countable-generation-passes-to-quotients",
+      "article_slug": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02",
+      "article_section": "§2 蝶番:空間を「開集合の代数」として見る(locale)（発展）",
+      "article_quote_ja": "部分空間は、locale の言葉では商フレーム(sublocale、フレームの全射準同型 O(X)→M)に対応する。フレームの全射は join を保つので、可算生成性は商に遺伝する:S が O(X) を join 生成すれば、その像が商を join 生成する。",
+      "claim_ja": "フレームの全射準同型 f : α → β について、α が可算集合 S で join 生成されるなら（どの元も S の部分集合の上限）、β も可算集合 f(S) で join 生成される。",
+      "lean_statement": "theorem MathGarden.ClimbingWithAlgebraOfOpens.countably_generated_of_surjective [Frame α] [Frame β] (f : FrameHom α β) (hf : Function.Surjective f) (h : ∃ S : Set α, S.Countable ∧ JoinGenerates S) : ∃ S : Set β, S.Countable ∧ JoinGenerates S",
+      "lean_decl": "MathGarden.ClimbingWithAlgebraOfOpens.countably_generated_of_surjective",
+      "file": "MathGarden/ClimbingWithAlgebraOfOpens/FramesAndCovers.lean",
+      "level": "L1",
+      "not_covered_ja": "「部分空間 ↔ 商フレーム」の対応そのもの、「第二可算 ⇔ O(X) が可算生成」は確かめていない。JoinGenerates はこのリポジトリで定義した（どの元も S の部分集合の sSup）。"
+    },
+    {
+      "id": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02/powerset-real-not-countably-generated",
+      "article_slug": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02",
+      "article_section": "§2 蝶番:空間を「開集合の代数」として見る(locale)（発展）",
+      "article_quote_ja": "R_disc のフレームは冪集合 P(R) で、各一点集合 {x} は他の開集合の非自明な join では書けない(原子)。原子は生成系に必ず自分自身が入っていなければならないから、非可算個の原子をもつ P(R) は可算生成ではない。",
+      "claim_ja": "ℝ の冪集合のフレーム（ℝ_disc の開集合全体）は、どんな可算集合でも join 生成されない。",
+      "lean_statement": "theorem MathGarden.ClimbingWithAlgebraOfOpens.powerset_real_not_countably_generated : ¬ ∃ S : Set (Set ℝ), S.Countable ∧ JoinGenerates S",
+      "lean_decl": "MathGarden.ClimbingWithAlgebraOfOpens.powerset_real_not_countably_generated",
+      "file": "MathGarden/ClimbingWithAlgebraOfOpens/FramesAndCovers.lean",
+      "level": "L1",
+      "not_covered_ja": "証明は記事と同じ筋（一点集合は生成系に入る→生成系は非可算）。ここから「ℝ_disc は ℝ^n に埋め込めない」を導く所（上の遺伝と第二可算性を合わせる所）は Lean で書いていない（別の項目 realdisc-not-embeddable-in-rn は点集合位相の形で確かめたもの）。"
+    },
+    {
+      "id": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02/top-to-locale-adjunction",
+      "article_slug": "開集合の代数で登る_Rdiscと Zariski étale_2026-06-02",
+      "article_section": "§2 蝶番:空間を「開集合の代数」として見る(locale)",
+      "article_quote_ja": "フレームを「空間そのもの」とみなして扱う対象を locale(ロケール、点なし位相)という。驚くのは、点をフレームから復元できることだ。点とは、フレーム O(X) から二元フレーム {0,1} への準同型 … に対応する。",
+      "claim_ja": "位相空間に開集合のフレーム（locale）を対応させる関手 topToLocale と、locale にその点（フレーム準同型 L → Prop）の空間を対応させる関手 pt は随伴（topToLocale ⊣ pt）。",
+      "lean_statement": "def Locale.adjunctionTopToLocalePT : topToLocale ⊣ pt（ほか Locale.PT L = FrameHom L Prop）",
+      "lean_decl": "Locale.adjunctionTopToLocalePT",
+      "file": "MathGarden/ClimbingWithAlgebraOfOpens/FramesAndCovers.lean",
+      "level": "L0",
+      "not_covered_ja": "記事の「良い空間（sober な空間）ではフレームから点を復元すると元に戻る」（随伴の単位が同相になること）は確かめていない。二元フレーム {0,1} は Lean では Prop。Stone 双対、§3 の site・topos、§4 の étale の話（別記事の項目 zariski-le-etale を参照）は扱っていない。"
     }
   ]
 }

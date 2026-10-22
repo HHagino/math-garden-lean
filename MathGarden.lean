@@ -33,3 +33,4 @@ import MathGarden.HyperbolicCircleApolloniusCayley.CircleAroundI
 import MathGarden.EulerFactorLocalMellin.LocalFactors
 import MathGarden.SimultaneousDiagonalizationCommutingMatrices.EigenspacesAndPauli
 import MathGarden.WhyZariskiCannotCountPoints.ProjectiveLineAndEtale
+import MathGarden.ClimbingWithAlgebraOfOpens.FramesAndCovers

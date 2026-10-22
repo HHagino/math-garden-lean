@@ -728,6 +728,42 @@
       "file": "MathGarden/TsurukameKTheorySpecialClassMath/TsurukameAndK0Point.lean",
       "level": "L1",
       "not_covered_ja": "K^0(pt) をベクトル束（ベクトル空間）の同型類のモノイドとして作ることはしていない。Lean は次元のモノイド (ℕ, +) の Grothendieck 群から始めた。「同型類は次元で決まる」の部分は別記事の項目 linear-algebra-as-k-theory-of-point/finite-dimensional-classification-by-dimension（Mathlib の nonempty_linearEquiv_iff_finrank_eq）に当たり、二つをつないだ形（Vect(pt) の同型類の Grothendieck 群 ≅ ℤ）は書いていない。§3 の「鶴と亀の Grothendieck 群」や「K(ℕ^2) ≅ ℤ^2」、§6 以降の Hodge Laplacian・変形量子化は扱っていない。"
+    },
+    {
+      "id": "縮約密度行列_部分トレースと同じか_2026-06-02/bell-partial-trace",
+      "article_slug": "縮約密度行列_部分トレースと同じか_2026-06-02",
+      "article_section": "0. まず手を動かす ── Bell 状態の部分トレース",
+      "article_quote_ja": "全系は純粋状態 ρ=|Φ+⟩⟨Φ+| で、行列で書けば {00,01,10,11} を基底とする 4×4 行列の四隅だけに 1/2 が立つ。部分トレース Tr_B は、A の添字 a,a' を固定して B の対角だけ足す操作だ: (ρ_A)_{aa'}=Σ_b ρ_{(a,b),(a',b)}。… 結果は ρ_A=Tr_B ρ=(1/2)|0⟩⟨0|+(1/2)|1⟩⟨1|=I/2.",
+      "claim_ja": "|Φ+⟩=(|00⟩+|11⟩)/√2 から作った ρ=|Φ+⟩⟨Φ+| の成分は、行と列の添字がどちらも 00 か 11 のときだけ 1/2 で、ほかは 0（bellDensity_apply）。記事の式 (ρ_A)_{aa'}=Σ_b ρ_{(a,b),(a',b)} で定義した部分トレース ptraceB を当てると、ρ_A = (1/2)·I（2×2 の単位行列の半分）になる。",
+      "lean_statement": "theorem MathGarden.ReducedDensityMatrixPartialTrace.bell_ptraceB : ptraceB bellDensity = (1 / 2 : ℝ) • (1 : Matrix (Fin 2) (Fin 2) ℝ)（ptraceB ρ := Matrix.of fun i i' => ∑ j, ρ (i, j) (i', j)、bellDensity := Matrix.vecMulVec bellState bellState、bellState p := if p.1 = p.2 then (√2)⁻¹ else 0）",
+      "lean_decl": "MathGarden.ReducedDensityMatrixPartialTrace.bell_ptraceB",
+      "file": "MathGarden/ReducedDensityMatrixPartialTrace/BellPartialTrace.lean",
+      "level": "L1",
+      "not_covered_ja": "係数は実数で書いた（|Φ+⟩ の成分は実数なので ⟨Φ+| は転置と同じだが、複素ヒルベルト空間 ℂ^2⊗ℂ^2 としては書いていない）。テンソル積 H_A⊗H_B は添字の組 (a, b) で表した。「最大混合」「Bloch 球の中心」「エンタングルメントの指紋」という読み（図2）は確かめていない。部分トレースは Mathlib に無かったので記事の式をそのまま定義にした（Mathlib の何かと一致することは確かめていない）。"
+    },
+    {
+      "id": "縮約密度行列_部分トレースと同じか_2026-06-02/partial-trace-reproduces-expectations",
+      "article_slug": "縮約密度行列_部分トレースと同じか_2026-06-02",
+      "article_section": "1. 量子情報の縮約密度行列:部分系だけを見る",
+      "article_quote_ja": "A だけにはたらく任意の観測量 O_A について Tr_{H_A}(ρ_A O_A)=Tr_{H_A⊗H_B}(ρ (O_A⊗I_B)).",
+      "claim_ja": "任意の可換環 R、有限の添字集合 A, B、(A×B)×(A×B) 行列 ρ と A×A 行列 O について、Tr(Tr_B(ρ)·O) = Tr(ρ·(O ⊗ I_B))（⊗ は Kronecker 積）。ρ が密度行列であること（正値・トレース 1）は使わない。",
+      "lean_statement": "theorem MathGarden.ReducedDensityMatrixPartialTrace.trace_ptraceB_mul {α β R : Type*} [Fintype α] [Fintype β] [DecidableEq β] [CommRing R] (ρ : Matrix (α × β) (α × β) R) (O : Matrix α α R) : Matrix.trace (ptraceB ρ * O) = Matrix.trace (ρ * (O ⊗ₖ (1 : Matrix β β R)))",
+      "lean_decl": "MathGarden.ReducedDensityMatrixPartialTrace.trace_ptraceB_mul",
+      "file": "MathGarden/ReducedDensityMatrixPartialTrace/BellPartialTrace.lean",
+      "level": "L1",
+      "not_covered_ja": "記事より一般（任意の可換環・任意の行列。観測量が自己共役であることも ρ が状態であることも使わない）。記事の続き「この再現性は部分トレースを一意に決める（Tr_B をこの等式を満たす唯一の線型写像として定義してもよい）」という一意性は確かめていない。§2 以降（Peschel の公式・1-RDM・連続 QFT の Type III）は扱っていない。"
+    },
+    {
+      "id": "縮約密度行列_部分トレースと同じか_2026-06-02/bell-measurement-check",
+      "article_slug": "縮約密度行列_部分トレースと同じか_2026-06-02",
+      "article_section": "0. まず手を動かす ── Bell 状態の部分トレース",
+      "article_quote_ja": "念のため、ρ_A が A の測定を再現することも一例で確かめる。射影 O_A=|0⟩⟨0| に対し Tr(ρ_A O_A)=1/2、一方 ⟨Φ+|(O_A⊗I_B)|Φ+⟩=1/2。両者は一致する。",
+      "claim_ja": "O_A = |0⟩⟨0|（行列 [[1,0],[0,0]]）について、Tr(ρ_A O_A) = 1/2、⟨Φ+|(O_A⊗I_B)|Φ+⟩ = 1/2（ベクトルの内積として計算）、さらに全系のトレース Tr(ρ (O_A⊗I_B)) も 1/2（§1 の定理 trace_ptraceB_mul から）。",
+      "lean_statement": "theorem MathGarden.ReducedDensityMatrixPartialTrace.bell_measurement_reproduced : Matrix.trace (ptraceB bellDensity * proj0) = 1 / 2 ∧ bellState ⬝ᵥ ((proj0 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℝ)) *ᵥ bellState) = 1 / 2 ∧ Matrix.trace (bellDensity * (proj0 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℝ))) = 1 / 2",
+      "lean_decl": "MathGarden.ReducedDensityMatrixPartialTrace.bell_measurement_reproduced",
+      "file": "MathGarden/ReducedDensityMatrixPartialTrace/BellPartialTrace.lean",
+      "level": "L1",
+      "not_covered_ja": "係数は実数で書いた（上の項目と同じ）。確かめたのは O_A = |0⟩⟨0| の一例だけ（一般の O_A は §1 の項目 partial-trace-reproduces-expectations）。"
     }
   ]
 }
